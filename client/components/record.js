@@ -1,25 +1,19 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+// import {connect} from 'react-redux'
+// import {Link} from 'react-router-dom'
+
+var recorder
 
 export class Record extends React.Component {
   constructor() {
     super()
-    // this.state = defaultState
     this.startRecording = this.startRecording.bind(this)
-    this.stopRecording = this.stopRecording.bind(this)
-    // this.getVideo = this.getVideo.bind(this)
+    this.realStopRecording = this.realStopRecording.bind(this)
   }
   // componentDidMount() {
-  //   this.props.getCartThunk()
-  // }
-
-  // getVideo = el => {
-  //   this.video = el
   // }
 
   startRecording = () => {
-    let recordRTC = null
     let isMimeTypeSupported = _mimeType => {
       if (typeof MediaRecorder.isTypeSupported !== 'function') {
         return true
@@ -52,27 +46,18 @@ export class Record extends React.Component {
       recorderType: StereoAudioRecorder
     }
 
-    // let video = this.getVideo
     var video = this.refs.vidRef
-    // let video = this.video
-    console.log(video)
-
-    var recorder
-
-    // Disable start recording button
-    this.disabled = true
+    var stop = this.refs.stop
 
     // Request access to the media devices
     navigator.mediaDevices
       .getUserMedia(rtcSession)
       .then(function(stream) {
         // Display a live preview on the video element of the page
-
         setSrcObject(stream, video)
 
         // Start to display the preview on the video element
         // and mute the video to disable the echo issue !
-
         video.play()
         video.muted = true
 
@@ -91,15 +76,41 @@ export class Record extends React.Component {
 
         // release stream on stopRecording
         recorder.stream = stream
-
-        // Enable stop recording button
-        document.getElementById('btn-stop-recording').disabled = false
       })
       .catch(function(error) {
         console.error('Cannot access media devices: ', error)
       })
 
     // false
+  }
+
+  realStopRecording = () => {
+    recorder
+      .stopRecording()
+      .then(async function() {
+        console.info('stopRecording success')
+
+        // Retrieve recorded video as blob and display in the preview element
+        let videoBlob = await recorder.getBlob()
+        // video.src = URL.createObjectURL(videoBlob)
+
+        var xhr = new XMLHttpRequest()
+        xhr.onload = function(e) {
+          if (this.readyState === 4) {
+            console.log('Server returned: ', e.target.responseText)
+          }
+        }
+        var fd = new FormData()
+        fd.append('audio_data', videoBlob, 'videoBlob.wav')
+
+        let newFile = fd.get('audio_data')
+        // invokeSaveAsDialog(newFile)
+
+        recorder.stream.stop()
+      })
+      .catch(function(error) {
+        console.error('stopRecording failure', error)
+      })
   }
 
   render() {
@@ -111,9 +122,10 @@ export class Record extends React.Component {
           Start Recording
         </button>
         <button
-          id="btn-stop-recording"
-          onClick={this.stopRecording}
-          disabled="disabled"
+          id="stop"
+          ref="stop"
+          onClick={this.realStopRecording}
+          // disabled="disabled"
         >
           Stop Recording
         </button>

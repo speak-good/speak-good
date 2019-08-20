@@ -7,6 +7,9 @@ const Video = db.define('video', {
   },
   transcript: {
     type: Sequelize.TEXT
+  },
+  fillerCount: {
+    type: Sequelize.INTEGER
   }
 })
 

@@ -1,15 +1,66 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Video} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({
+      firstName: 'Cody',
+      lastName: 'Pug',
+      email: 'cody@email.com',
+      password: '123'
+    }),
+    User.create({
+      firstName: 'Murphy',
+      lastName: 'Prosacco',
+      email: 'murphy@email.com',
+      password: '123'
+    }),
+    User.create({
+      firstName: 'Sherman',
+      lastName: 'Jacobs',
+      email: 'shyann67@yahoo.com',
+      password: '123'
+    }),
+    User.create({
+      firstName: 'Rosalinda',
+      lastName: 'Beatty',
+      email: 'conner_Purdy@hotmail.com',
+      password: '123'
+    }),
+    User.create({
+      firstName: 'Frank',
+      lastName: 'Batz',
+      email: 'genoveva38@hotmail.com',
+      password: '123'
+    })
+  ])
+
+  const videos = await Promise.all([
+    Video.create({
+      slouch: 33.0,
+      transcript: 'Blanditiis quo est eaque. Voluptate nam autem cum numquam.',
+      fillerCount: 3
+    }),
+    Video.create({
+      slouch: 12.3,
+      transcript: 'Granite pricing structure Home Loan Account',
+      fillerCount: 4
+    }),
+    Video.create({
+      slouch: 10.3,
+      transcript: 'implementation Jamaican Dollar',
+      fillerCount: 0
+    }),
+    Video.create({
+      slouch: 1.3,
+      transcript: 'benchmark Lebanese Pound China',
+      fillerCount: 1
+    })
   ])
 
   console.log(`seeded ${users.length} users`)

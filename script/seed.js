@@ -42,25 +42,21 @@ async function seed() {
 
   const videos = await Promise.all([
     Video.create({
-      audio: '/examples/alien.mp3',
       slouch: 33.0,
       transcript: 'Blanditiis quo est eaque. Voluptate nam autem cum numquam.',
       fillerCount: 3
     }),
     Video.create({
-      audio: '/examples/alien.mp3',
       slouch: 12.3,
       transcript: 'Granite pricing structure Home Loan Account',
       fillerCount: 4
     }),
     Video.create({
-      audio: '/examples/alien.mp3',
       slouch: 10.3,
       transcript: 'implementation Jamaican Dollar',
       fillerCount: 0
     }),
     Video.create({
-      audio: '/examples/ex.m4a',
       slouch: 1.3,
       transcript: 'benchmark Lebanese Pound China',
       fillerCount: 1

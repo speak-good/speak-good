@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, Home} from './components'
 import Record from './components/record'
 import {me} from './store'
-import Audio from './components/audio'
+
 /**
  * COMPONENT
  */
@@ -29,7 +29,6 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
-            <Route path="/audio" component={Audio} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

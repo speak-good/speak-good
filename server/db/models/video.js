@@ -2,9 +2,6 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Video = db.define('video', {
-  audio: {
-    type: Sequelize.STRING
-  },
   slouch: {
     type: Sequelize.FLOAT
   },

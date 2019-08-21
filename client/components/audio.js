@@ -1,17 +1,20 @@
 import React from 'react'
 import firebaseConfig from '../../secrets'
 import firebase from 'firebase'
-
+import {fetchAudio} from '../store/audio'
+import {connect} from 'react-redux'
 //import firebase from 'firebase'
 
-export default class Audio extends React.Component {
+export class Audio extends React.Component {
   constructor() {
     super()
     this.state = {
       audio: ''
     }
+    this.getAudioFromFirebase = this.getAudioFromFirebase.bind(this)
   }
-  componentDidMount() {
+
+  getAudioFromFirebase = () => {
     firebase.initializeApp(firebaseConfig)
     const storageRef = firebase.storage().ref()
     console.log('storageRef', storageRef)
@@ -25,6 +28,11 @@ export default class Audio extends React.Component {
     //console.log('state', this.state.audio)
   }
 
+  componentDidMount() {
+    this.props.fetchAudio()
+    this.getAudioFromFirebase()
+  }
+
   render() {
     return (
       <div>
@@ -33,3 +41,19 @@ export default class Audio extends React.Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    audio: state.audio
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchAudio: function() {
+      dispatch(fetchAudio())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Audio)

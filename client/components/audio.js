@@ -3,7 +3,6 @@ import firebaseConfig from '../../secrets'
 import firebase from 'firebase'
 
 //import firebase from 'firebase'
-firebase.initializeApp(firebaseConfig)
 
 export default class Audio extends React.Component {
   constructor() {
@@ -13,19 +12,23 @@ export default class Audio extends React.Component {
     }
   }
   componentDidMount() {
+    firebase.initializeApp(firebaseConfig)
     const storageRef = firebase.storage().ref()
-    const audioRef = storageRef.child('examples/ex.m4a')
-    audioRef.getDownloadUrl().then(url => {
+    console.log('storageRef', storageRef)
+    const audioRef = storageRef.child('/examples/alien.mov')
+    console.log('audioRef', audioRef)
+    audioRef.getDownloadURL().then(url => {
+      // console.log("url", url)
       this.setState({audio: url})
+      //console.log('state',this.state)
     })
+    //console.log('state', this.state.audio)
   }
 
   render() {
     return (
       <div>
-        <audio controls>
-          <source src={this.state.audio} type="audio/x-m4a" />
-        </audio>
+        <audio controls src={this.state.audio} />
       </div>
     )
   }

@@ -1,14 +1,14 @@
 const router = require('express').Router()
-const {Video, User} = require('../db/models')
+const {Recording, User} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    const videos = await Video.findAll({
+    const recordings = await Recording.findAll({
       where: {
         userId: req.user.id
       }
     })
-    res.json(videos)
+    res.json(recordings)
   } catch (err) {
     next(err)
   }
@@ -16,13 +16,13 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const video = await Video.findOne({
+    const recordings = await Recording.findOne({
       where: {
         id: req.params.id,
         userId: req.user.id
       }
     })
-    res.json(video)
+    res.json(recordings)
   } catch (err) {
     next(err)
   }

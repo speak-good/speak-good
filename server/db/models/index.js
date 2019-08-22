@@ -1,13 +1,13 @@
 const User = require('./user')
-const Video = require('./video')
+const Recording = require('./recording')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
  *
  *    BlogPost.belongsTo(User)
  */
-Video.belongsTo(User)
-User.hasMany(Video)
+Recording.belongsTo(User)
+User.hasMany(Recording)
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'
@@ -16,5 +16,5 @@ User.hasMany(Video)
  */
 module.exports = {
   User,
-  Video
+  Recording
 }

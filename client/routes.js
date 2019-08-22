@@ -4,7 +4,8 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, Home} from './components'
 import Record from './components/record'
-import Audio from './components/audio'
+import Recordings from './components/recordings'
+import SingleRecording from './components/singleRecording'
 import {me} from './store'
 
 /**
@@ -24,13 +25,14 @@ class Routes extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/audio" component={Audio} />
         <Route exact path="/record" component={Record} />
 
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route exact path="/recordings" component={Recordings} />
+            <Route exact path="/recordings/:id" component={SingleRecording} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

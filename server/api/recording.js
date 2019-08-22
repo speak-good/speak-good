@@ -28,4 +28,17 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res, next) => {
+  try {
+    const {video} = req.body
+    const recording = await Recording.create({
+      video: video,
+      userId: req.user.id
+    })
+    res.send(recording)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router

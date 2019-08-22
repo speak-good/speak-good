@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import SpeechRecognition from 'react-speech-recognition'
+import firebase from 'firebase'
+import firebaseConfig from '../../secrets'
+import {addNewRecording} from '../store/recordings'
 
 const propTypes = {
   transcript: PropTypes.string,
@@ -53,6 +56,10 @@ const fillerPhrases = {
   'kind of': true,
   'Sort of': true,
   'sort of': true
+}
+
+const initializeFirebase = () => {
+  firebase.initializeApp(firebaseConfig)
 }
 
 var recorder
@@ -166,7 +173,14 @@ const Record = ({
         let videoBlob = await recorder.getBlob()
 
         //this is where *we think* we will pass our 'videoBlob' up to Firebase Storage somehow, to then get a "link", to then store in our database
-
+        initializeFirebase()
+        var storageRef = firebase.storage().ref()
+        var videoRef = storageRef.child('hardcoded.webm')
+        var videoWebmRef = storageRef.child('examples/hardcoded.webm')
+        var file = videoBlob
+        videoWebmRef.put(file).then(function(snapshot) {
+          console.log('Uploaded blob or file!')
+        })
         // --> command to download as a file
         invokeSaveAsDialog(videoBlob)
 

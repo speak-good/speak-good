@@ -1,71 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import SpeechRecognition from 'react-speech-recognition'
-// import {connect} from 'react-redux'
-// import {Link} from 'react-router-dom'
-
-// const Record = ({
-//   transcript,
-//   resetTranscript,
-//   abortListening,
-//   startListening,
-//   browserSupportsSpeechRecognition
-// }) => {
-//   if (!browserSupportsSpeechRecognition) {
-//     return null
-//   }
-
-//   const stop = () => {
-//     abortListening()
-//     let count = 0
-//     let fillerWordsUsed = []
-//     let transcriptArr = transcript.split(' ')
-//     transcriptArr.forEach(function(word) {
-//       if (fillerWords[word]) {
-//         count++
-//         fillerWordsUsed.push(word)
-//       }
-//     })
-//     for (let i = 0; i < transcriptArr.length; i++) {
-//       let currPhrase = transcriptArr[i] + ' ' + transcriptArr[i + 1]
-//       if (fillerPhrases[currPhrase]) {
-//         count++
-//         fillerWordsUsed.push(currPhrase)
-//       }
-//     }
-
-//     console.log('NOT FILTERED TRANSCRIPT: ', transcript)
-//     console.log('FILLER WORD COUNT: ', count)
-//     console.log('FILLER WORDS USED: ', fillerWordsUsed)
-//     resetTranscript()
-//   }
-
-//   return (
-//     <div>
-//       <br />
-//       <br />
-//       <br />
-//       <br />
-//       <br />
-//       <br />
-//       <br />
-//       <h3>Record and transcribe!</h3>
-//       <button type="button" onClick={startListening}>
-//         Start
-//       </button>
-//       <button type="button" onClick={resetTranscript}>
-//         Reset
-//       </button>
-//       <button type="button" onClick={stop}>
-//         Stop
-//       </button>
-//     </div>
-//   )
-// }
-
-// Record.propTypes = propTypes
-
-//////////////////////////////////////////////////
 
 const propTypes = {
   transcript: PropTypes.string,
@@ -99,10 +34,6 @@ const fillerWords = {
   actually: true,
   Really: true,
   really: true,
-  Kinda: true,
-  kinda: true,
-  Sorta: true,
-  sorta: true,
   Stuff: true,
   stuff: true,
   Whatever: true,
@@ -130,32 +61,12 @@ const Record = ({
   transcript,
   resetTranscript,
   abortListening,
-  startListening
-  // browserSupportsSpeechRecognition
+  startListening,
+  browserSupportsSpeechRecognition
 }) => {
-  // if (!browserSupportsSpeechRecognition) {
-  //   return null
-  // }
-
-  // export class Record extends React.Component {
-  //   constructor() {
-  //     super()
-
-  //     // this.startRecording = this.startRecording.bind(this)
-  //     // this.realStopRecording = this.realStopRecording.bind(this)
-  //     // this.transcript = this.transcript.bind(this)
-  //     // this.resetTranscript = this.resetTranscript.bind(this)
-  //     // this.abortListening = this.abortListening.bind(this)
-  //     // this.startListening = this.startListening.bind(this)
-
-  //     // this.record = {
-  //     //   transcript,
-  //     //   resetTranscript,
-  //     //   abortListening,
-  //     //   startListening,
-  //     // browserSupportsSpeechRecognition
-  //     // }
-  //   }
+  if (!browserSupportsSpeechRecognition) {
+    return null
+  }
 
   let startRecording = () => {
     startListening()
@@ -177,7 +88,6 @@ const Record = ({
         if (isMimeTypeSupported(mimeType) === false) {
           console.log(mimeType, 'is not supported.')
 
-          // fallback to WebAudio solution
           mimeType = 'audio/wav'
           // recorderType = MediaStreamRecorder
         }
@@ -195,24 +105,20 @@ const Record = ({
     // var video = React.forwardRef('vidRef')
     ///////////////////////
 
-    // Request access to the media devices
     navigator.mediaDevices
       .getUserMedia(rtcSession)
       .then(function(stream) {
+        ///////////////////////
         // Display a live preview on the video element of the page
         // setSrcObject(stream, video)
-
-        ///////////////////////
         // Start to display the preview on the video element
         // and mute the video to disable the echo issue !
         // video.play()
         // video.muted = true
         ///////////////////////
 
-        // Initialize the recorder
         recorder = new RecordRTCPromisesHandler(stream, rtcSession)
 
-        // Start recording the video
         recorder
           .startRecording()
           .then(function() {
@@ -222,7 +128,6 @@ const Record = ({
             console.error('Cannot start video recording: ', error)
           })
 
-        // release stream on stopRecording
         recorder.stream = stream
       })
       .catch(function(error) {
@@ -260,7 +165,7 @@ const Record = ({
         console.info('stopRecording success')
         let videoBlob = await recorder.getBlob()
 
-        //this is where we'd pass our 'videoBlob' up to Firebase Storage, to then get a "link", to then store in our database
+        //this is where *we think* we will pass our 'videoBlob' up to Firebase Storage somehow, to then get a "link", to then store in our database
 
         // --> command to download as a file
         invokeSaveAsDialog(videoBlob)
@@ -280,11 +185,7 @@ const Record = ({
       <button id="btn-start-recording" onClick={startRecording}>
         Start Recording
       </button>
-      <button
-        id="stop"
-        onClick={realStopRecording}
-        // disabled="disabled"
-      >
+      <button id="stop" onClick={realStopRecording}>
         {/* <button
         id="stop"
         ref="stop"
@@ -297,16 +198,7 @@ const Record = ({
     </div>
   )
 }
-// function mapStateToProps(state) {
-//   return {
-//   }
-// }
-// function mapDispatchToProps(dispatch) {
-//   return {
-//   }
-// }
 
-// export default Record
 Record.propTypes = propTypes
 
 export default SpeechRecognition(options)(Record)

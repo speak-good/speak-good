@@ -1,4 +1,6 @@
 import axios from 'axios'
+import * as methods from 'react-speech-recognition'
+// import transcript from SpeechRecognition
 
 /**
  * ACTION TYPES
@@ -11,7 +13,8 @@ const GET_AUDIO = 'GET_AUDIO'
  */
 const initialState = {
   audio: [],
-  singleAudio: {}
+  singleAudio: {},
+  methods
 }
 
 /**

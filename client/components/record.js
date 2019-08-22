@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import SpeechRecognition from 'react-speech-recognition'
+import {connect} from 'react-redux'
 
 const propTypes = {
   transcript: PropTypes.string,
-  resetTranscript: PropTypes.func,
-  browserSupportsSpeechRecognition: PropTypes.bool
+  resetTranscript: PropTypes.func
+  // browserSupportsSpeechRecognition: PropTypes.bool
 }
 
 const options = {
@@ -57,19 +58,29 @@ const fillerPhrases = {
 
 var recorder
 
-const Record = ({
-  transcript,
-  resetTranscript,
-  abortListening,
-  startListening,
-  browserSupportsSpeechRecognition
-}) => {
-  if (!browserSupportsSpeechRecognition) {
-    return null
+export class Record extends React.Component {
+  constructor() {
+    super()
   }
 
-  let startRecording = () => {
-    startListening()
+  // startListening = this.props.startListening
+  // abortListening = this.props.abortListening
+  // transcript = this.props.transcript
+  // resetTranscript = this.props.transcript
+
+  // const Record = ({
+  //   transcript,
+  //   resetTranscript,
+  //   abortListening,
+  //   startListening,
+  //   browserSupportsSpeechRecognition
+  // }) => {
+  //   if (!browserSupportsSpeechRecognition) {
+  //     return null
+  //   }
+
+  startRecording = () => {
+    this.props.startListening()
     let isMimeTypeSupported = _mimeType => {
       if (typeof MediaRecorder.isTypeSupported !== 'function') {
         return true
@@ -102,7 +113,7 @@ const Record = ({
     }
 
     ///////////////////////
-    // var video = React.forwardRef('vidRef')
+    var video = this.refs.vidRef
     ///////////////////////
 
     navigator.mediaDevices
@@ -110,11 +121,11 @@ const Record = ({
       .then(function(stream) {
         ///////////////////////
         // Display a live preview on the video element of the page
-        // setSrcObject(stream, video)
+        setSrcObject(stream, video)
         // Start to display the preview on the video element
         // and mute the video to disable the echo issue !
-        // video.play()
-        // video.muted = true
+        video.play()
+        video.muted = true
         ///////////////////////
 
         recorder = new RecordRTCPromisesHandler(stream, rtcSession)
@@ -135,11 +146,13 @@ const Record = ({
       })
   }
 
-  let realStopRecording = () => {
-    abortListening()
+  realStopRecording = () => {
+    console.log(this.props.transcript)
+    this.props.abortListening()
     let count = 0
     let fillerWordsUsed = []
-    let transcriptArr = transcript.split(' ')
+    let realTranscript = this.props.transcript
+    let transcriptArr = realTranscript.split(' ')
     transcriptArr.forEach(function(word) {
       if (fillerWords[word]) {
         count++
@@ -154,10 +167,10 @@ const Record = ({
       }
     }
 
-    console.log('NOT FILTERED TRANSCRIPT: ', transcript)
+    console.log('NOT FILTERED TRANSCRIPT: ', this.props.transcript)
     console.log('FILLER WORD COUNT: ', count)
     console.log('FILLER WORDS USED: ', fillerWordsUsed)
-    resetTranscript()
+    this.props.resetTranscript()
 
     recorder
       .stopRecording()
@@ -176,36 +189,49 @@ const Record = ({
         console.error('stopRecording failure', error)
       })
   }
+  render() {
+    // console.log(this.props)
+    return (
+      <div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <h3>Recording Page</h3>
+        <video id="vidRef" ref="vidRef" controls autoPlay />
+        <br />
+        <button id="btn-start-recording" onClick={this.startRecording}>
+          Start Recording
+        </button>
+        <button
+          id="stop"
+          ref="stop"
+          onClick={this.realStopRecording}
+          // disabled="disabled"
+        >
+          Stop Recording
+        </button>
+        <hr />
+      </div>
+    )
+  }
+}
 
-  return (
-    <div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <h3>Recording Page</h3>
-      {/* <video id="vidRef" ref="vidRef" controls autoPlay /> */}
-      <video id="vidRef" controls autoPlay />
-      <br />
-      <button id="btn-start-recording" onClick={startRecording}>
-        Start Recording
-      </button>
-      <button id="stop" onClick={realStopRecording}>
-        {/* <button
-        id="stop"
-        ref="stop"
-        onClick={realStopRecording}
-        // disabled="disabled"
-      > */}
-        Stop Recording
-      </button>
-      <hr />
-    </div>
-  )
+function mapStateToProps(state) {
+  return {
+    // methods: state.audio.methods
+    transcript: state.audio.methods.transcript,
+    resetTranscript: () => state.audio.methods.resetTranscript,
+    abortListening: () => state.audio.methods.abortListening,
+    startListening: () => state.audio.methods.startListening
+    // browserSupportsSpeechRecognition: state.methods.browserSupportsSpeechRecognition
+  }
 }
 
 Record.propTypes = propTypes
 
-export default SpeechRecognition(options)(Record)
+export default connect(mapStateToProps, null)(Record)
+
+// export default SpeechRecognition(options)(Record)

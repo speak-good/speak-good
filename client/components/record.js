@@ -179,9 +179,16 @@ const Record = ({
 
   return (
     <div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <h3>Recording Page</h3>
       {/* <video id="vidRef" ref="vidRef" controls autoPlay /> */}
       <video id="vidRef" controls autoPlay />
+      <br />
       <button id="btn-start-recording" onClick={startRecording}>
         Start Recording
       </button>

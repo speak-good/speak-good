@@ -16,6 +16,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             <Link to="/record">Record</Link>
           </div>
           <div className="nav-item">
+            <Link to="/audio">Audio</Link>
+          </div>
+          <div className="nav-item">
             <Link to="/home">Home</Link>
           </div>
           <div className="nav-item">

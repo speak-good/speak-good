@@ -30,7 +30,7 @@ export class Audio extends React.Component {
 
   componentDidMount() {
     this.props.fetchAudio()
-    this.getAudioFromFirebase()
+    this.getAudioFromFirebase('/examples/alien.mp3')
   }
 
   render() {

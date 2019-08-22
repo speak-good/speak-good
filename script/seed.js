@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Video} = require('../server/db/models')
+const {User, Recording} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -41,22 +41,30 @@ async function seed() {
   ])
 
   const videos = await Promise.all([
-    Video.create({
+    Recording.create({
+      userId: 1,
+      video: '/examples/exampleVid.webm',
       slouch: 33.0,
       transcript: 'Blanditiis quo est eaque. Voluptate nam autem cum numquam.',
       fillerCount: 3
     }),
-    Video.create({
+    Recording.create({
+      userId: 1,
+      video: '/examples/exampleVid.webm',
       slouch: 12.3,
       transcript: 'Granite pricing structure Home Loan Account',
       fillerCount: 4
     }),
-    Video.create({
+    Recording.create({
+      userId: 1,
+      video: '/examples/exampleVid.webm',
       slouch: 10.3,
       transcript: 'implementation Jamaican Dollar',
       fillerCount: 0
     }),
-    Video.create({
+    Recording.create({
+      userId: 1,
+      video: '/examples/exampleVid.webm',
       slouch: 1.3,
       transcript: 'benchmark Lebanese Pound China',
       fillerCount: 1

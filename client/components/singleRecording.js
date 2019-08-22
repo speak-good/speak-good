@@ -1,20 +1,19 @@
 import React from 'react'
 import firebaseConfig from '../../secrets'
 import firebase from 'firebase'
-import {fetchAudio} from '../store/audio'
+import {fetchSingleRecording} from '../store/recordings'
 import {connect} from 'react-redux'
-//import firebase from 'firebase'
 
-export class Audio extends React.Component {
+export class SingleRecording extends React.Component {
   constructor() {
     super()
     this.state = {
-      audio: ''
+      video: ''
     }
-    this.getAudioFromFirebase = this.getAudioFromFirebase.bind(this)
+    this.getVideoFromFirebase = this.getVideoFromFirebase.bind(this)
   }
 
-  getAudioFromFirebase = audioPathArray => {
+  getVideoFromFirebase = audioPathArray => {
     firebase.initializeApp(firebaseConfig)
     const storageRef = firebase.storage().ref()
     console.log('storageRef', storageRef)
@@ -22,21 +21,23 @@ export class Audio extends React.Component {
     console.log('audioRef', audioRef)
     audioRef.getDownloadURL().then(url => {
       // console.log("url", url)
-      this.setState({audio: url})
+      this.setState({video: url})
       //console.log('state',this.state)
     })
     //console.log('state', this.state.audio)
   }
 
-  componentDidMount() {
-    this.props.fetchAudio()
-    this.getAudioFromFirebase('/examples/alien.mp3')
+  componentDidMount(props) {
+    const {singleRecording} = this.props.recordings
+    console.log('singleRecording', singleRecording)
+    this.props.fetchSingleRecording(this.props.match.params.id)
+    this.getVideoFromFirebase(singleRecording.video)
   }
 
   render() {
     return (
       <div>
-        <audio controls src={this.state.audio} />
+        <video controls src={this.state.video} />
       </div>
     )
   }
@@ -44,16 +45,16 @@ export class Audio extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    audio: state.audio
+    recordings: state.recordings
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchAudio: function() {
-      dispatch(fetchAudio())
+    fetchSingleRecording: function(id) {
+      dispatch(fetchSingleRecording(id))
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Audio)
+export default connect(mapStateToProps, mapDispatchToProps)(SingleRecording)

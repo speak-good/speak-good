@@ -14,11 +14,11 @@ export class Audio extends React.Component {
     this.getAudioFromFirebase = this.getAudioFromFirebase.bind(this)
   }
 
-  getAudioFromFirebase = () => {
+  getAudioFromFirebase = audioPathArray => {
     firebase.initializeApp(firebaseConfig)
     const storageRef = firebase.storage().ref()
     console.log('storageRef', storageRef)
-    const audioRef = storageRef.child('/examples/alien.mov')
+    const audioRef = storageRef.child(audioPathArray)
     console.log('audioRef', audioRef)
     audioRef.getDownloadURL().then(url => {
       // console.log("url", url)

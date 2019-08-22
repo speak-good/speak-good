@@ -11,32 +11,43 @@ export class SingleRecording extends React.Component {
       video: ''
     }
     this.getVideoFromFirebase = this.getVideoFromFirebase.bind(this)
+    this.initializeFirebase = this.initializeFirebase.bind(this)
+  }
+
+  initializeFirebase = () => {
+    firebase.initializeApp(firebaseConfig)
   }
 
   getVideoFromFirebase = audioPathArray => {
-    firebase.initializeApp(firebaseConfig)
     const storageRef = firebase.storage().ref()
     console.log('storageRef', storageRef)
     const audioRef = storageRef.child(audioPathArray)
-    console.log('audioRef', audioRef)
+    // console.log('audioRef', audioRef)
     audioRef.getDownloadURL().then(url => {
-      // console.log("url", url)
       this.setState({video: url})
-      //console.log('state',this.state)
     })
-    //console.log('state', this.state.audio)
   }
 
-  componentDidMount(props) {
-    const {singleRecording} = this.props.recordings
-    console.log('singleRecording', singleRecording)
+  componentDidMount() {
     this.props.fetchSingleRecording(this.props.match.params.id)
-    this.getVideoFromFirebase(singleRecording.video)
+    this.initializeFirebase()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.singleRecording !== prevProps.singleRecording) {
+      this.getVideoFromFirebase(this.props.singleRecording.video)
+    }
   }
 
   render() {
+    let {video} = this.props.singleRecording
+    // console.log('singleRecording', this.props.recordings)
+    if (!this.props.singleRecording.video) {
+      return <div>Loading...</div>
+    }
     return (
       <div>
+        {/* {this.getVideoFromFirebase(video)} */}
         <video controls src={this.state.video} />
       </div>
     )
@@ -45,7 +56,7 @@ export class SingleRecording extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    recordings: state.recordings
+    singleRecording: state.recordings.singleRecording
   }
 }
 

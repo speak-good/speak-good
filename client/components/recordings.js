@@ -2,8 +2,18 @@ import React from 'react'
 import {fetchRecordings} from '../store/recordings'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+//import firebaseConfig from '../../secrets'
+//import firebase from 'firebase'
 
 export class Recordings extends React.Component {
+  // constructor() {
+  //   super()
+  //   this.state = {
+  //     audio: ''
+  //   }
+  //   this.getAudioFromFirebase = this.getAudioFromFirebase.bind(this)
+  // }
+
   // getAudioFromFirebase = audioPathArray => {
   //   firebase.initializeApp(firebaseConfig)
   //   const storageRef = firebase.storage().ref()
@@ -20,13 +30,15 @@ export class Recordings extends React.Component {
 
   componentDidMount() {
     this.props.fetchRecordings()
-    //this.getAudioFromFirebase('/examples/exampleVid.webm')
+    // this.getAudioFromFirebase('/examples/exampleVid.webm')
   }
 
   render() {
     const {allRecording} = this.props.recordings
     return (
       <div id="recordingList">
+        {/* <video controls src={this.state.audio} />
+        {console.log(this.state.audio)} */}
         {allRecording.map(recording => (
           <div className="campus card" key={recording.id}>
             <div className="card-body">

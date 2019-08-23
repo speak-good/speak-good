@@ -1,7 +1,10 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Video = db.define('video', {
+const Recording = db.define('recording', {
+  video: {
+    type: Sequelize.STRING
+  },
   slouch: {
     type: Sequelize.FLOAT
   },
@@ -13,4 +16,4 @@ const Video = db.define('video', {
   }
 })
 
-module.exports = Video
+module.exports = Recording

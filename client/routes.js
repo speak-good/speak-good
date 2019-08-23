@@ -6,6 +6,7 @@ import {Login, Signup, UserHome, Home} from './components'
 import Record from './components/record'
 import Recordings from './components/recordings'
 import SingleRecording from './components/singleRecording'
+import TrainingSinglePose from './components/trainingSinglePose'
 import {me} from './store'
 
 /**
@@ -26,7 +27,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route exact path="/record" component={Record} />
-
+        <Route exact path="/train/:poseName" component={TrainingSinglePose} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

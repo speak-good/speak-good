@@ -35,7 +35,7 @@ router.post('/', async (req, res, next) => {
       video: video,
       userId: req.user.id
     })
-    res.send(recording)
+    res.json(recording)
   } catch (err) {
     next(err)
   }

@@ -55,6 +55,7 @@ export const fetchSingleRecording = id => async dispatch => {
 
 export const addNewRecording = recording => async dispatch => {
   try {
+    console.log('recording in thunk', recording)
     const res = await axios.post('/api/recordings', recording)
     dispatch(addRecording(res.data))
   } catch (err) {

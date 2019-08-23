@@ -60,7 +60,7 @@ const fillerPhrases = {
   'sort of': true
 }
 
-var recorder
+let recorder
 
 export class Record extends React.Component {
   constructor() {
@@ -70,7 +70,9 @@ export class Record extends React.Component {
   }
 
   initializeFirebase = () => {
-    firebase.initializeApp(firebaseConfig)
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig)
+    }
   }
 
   componentDidMount() {
@@ -89,11 +91,11 @@ export class Record extends React.Component {
     videoWebmRef.put(file).then(function(snapshot) {
       console.log('Uploaded blob or file!')
     })
-    this.props.addNewRecording(videoWebmRef)
+    this.props.addNewRecording({video: videoWebmRef.fullPath})
+    console.log('videoWebmReb.fullPath type:', typeof videoWebmRef.fullPath)
   }
 
   render() {
-    console.log('dU', this.props.defaultUser)
     if (!this.props.defaultUser.id) {
       return <div>Loading...</div>
     }

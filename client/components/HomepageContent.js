@@ -55,7 +55,7 @@ const Content = () => {
             <h3 className="feature-name">Analyze Speech</h3>
             <p className="feature-blurb">
               {' '}
-              We're all guilty of using "like", "um", among other conversational
+              We're all guilty of using "like", "so", and other conversational
               filler words. We will keep track of all your speech hesitations so
               you can improve with time and practice!
             </p>

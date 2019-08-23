@@ -30,12 +30,15 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const {video} = req.body
+    const {video, slouch, transcript, fillerCount} = req.body
     const recording = await Recording.create({
       video: video,
+      slouch: slouch,
+      transcript: transcript,
+      fillerCount: fillerCount,
       userId: req.user.id
     })
-    res.send(recording)
+    res.json(recording)
   } catch (err) {
     next(err)
   }

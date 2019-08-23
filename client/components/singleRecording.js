@@ -15,7 +15,9 @@ export class SingleRecording extends React.Component {
   }
 
   initializeFirebase = () => {
-    firebase.initializeApp(firebaseConfig)
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig)
+    }
   }
 
   getVideoFromFirebase = audioPathArray => {

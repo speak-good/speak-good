@@ -5,7 +5,7 @@ import SpeechRecognition from 'react-speech-recognition'
 import firebase from 'firebase'
 import firebaseConfig from '../../secrets'
 import {addNewRecording} from '../store/recordings'
-
+import {me} from '../store/user'
 import {connect} from 'react-redux'
 
 const propTypes = {
@@ -60,18 +60,43 @@ const fillerPhrases = {
   'sort of': true
 }
 
-const initializeFirebase = () => {
-  firebase.initializeApp(firebaseConfig)
-}
-
 var recorder
 
 export class Record extends React.Component {
   constructor() {
     super()
+    this.putVideoInFirebase = this.putVideoInFirebase.bind(this)
+    this.initializeFirebase = this.initializeFirebase.bind(this)
+  }
+
+  initializeFirebase = () => {
+    firebase.initializeApp(firebaseConfig)
+  }
+
+  componentDidMount() {
+    this.initializeFirebase()
+  }
+
+  putVideoInFirebase = video => {
+    var storageRef = firebase.storage().ref()
+    var date = Date.now()
+    var videoRef = storageRef.child(`${date}.webm`)
+    var videoWebmRef = storageRef.child(
+      `${this.props.defaultUser.id}/${date}.webm`
+    )
+    console.log('videoWebmRef', videoWebmRef)
+    var file = video
+    videoWebmRef.put(file).then(function(snapshot) {
+      console.log('Uploaded blob or file!')
+    })
+    this.props.addNewRecording(videoWebmRef)
   }
 
   render() {
+    console.log('dU', this.props.defaultUser)
+    if (!this.props.defaultUser.id) {
+      return <div>Loading...</div>
+    }
     const {
       transcript,
       resetTranscript,
@@ -136,7 +161,8 @@ export class Record extends React.Component {
     }
 
     const realStopRecording = () => {
-      console.log(this.props.transcript)
+      console.log('this', this)
+      var that = this
       this.props.abortListening()
       let count = 0
       let fillerWordsUsed = []
@@ -168,14 +194,8 @@ export class Record extends React.Component {
           let videoBlob = await recorder.getBlob()
 
           //this is where *we think* we will pass our 'videoBlob' up to Firebase Storage somehow, to then get a "link", to then store in our database
-          initializeFirebase()
-          var storageRef = firebase.storage().ref()
-          var videoRef = storageRef.child('hardcoded.webm')
-          var videoWebmRef = storageRef.child('examples/hardcoded.webm')
-          var file = videoBlob
-          videoWebmRef.put(file).then(function(snapshot) {
-            console.log('Uploaded blob or file!')
-          })
+          // console.log("this", this)
+          that.putVideoInFirebase(videoBlob)
           // --> command to download as a file
           invokeSaveAsDialog(videoBlob)
 
@@ -208,6 +228,25 @@ export class Record extends React.Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    defaultUser: state.user
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    me: function() {
+      dispatch(me())
+    },
+    addNewRecording: function(recording) {
+      dispatch(addNewRecording(recording))
+    }
+  }
+}
+
 Record.propTypes = propTypes
 
-export default connect(null, null)(SpeechRecognition(options)(Record))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  SpeechRecognition(options)(Record)
+)

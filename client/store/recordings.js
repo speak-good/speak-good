@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 const GET_ALL_RECORDING = 'GET_ALL_RECORDING'
 const GET_RECORDING = 'GET_RECORDING'
+const ADD_RECORDING = 'ADD_RECORDING'
 
 /**
  * INITIAL STATE
@@ -24,6 +25,11 @@ const getAllRecording = recordingList => ({
 const getSingleRecording = singleRecording => ({
   type: GET_RECORDING,
   singleRecording
+})
+
+const addRecording = recording => ({
+  type: ADD_RECORDING,
+  recording
 })
 
 /**
@@ -47,6 +53,16 @@ export const fetchSingleRecording = id => async dispatch => {
   }
 }
 
+export const addNewRecording = recording => async dispatch => {
+  try {
+    console.log('recording in thunk', recording)
+    const res = await axios.post('/api/recordings', recording)
+    dispatch(addRecording(res.data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -56,6 +72,8 @@ export default function(state = initialState, action) {
       return {...state, allRecording: action.recordingList}
     case GET_RECORDING:
       return {...state, singleRecording: action.singleRecording}
+    case ADD_RECORDING:
+      return {...state, allRecording: [...state.allRecording, action.recording]}
     default:
       return state
   }

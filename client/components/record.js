@@ -79,7 +79,7 @@ export class Record extends React.Component {
     this.initializeFirebase()
   }
 
-  putVideoInFirebase = video => {
+  putVideoInFirebase = (video, slouch, transcript, fillerCount) => {
     let storageRef = firebase.storage().ref()
     let date = Date.now()
     let videoRef = storageRef.child(`${date}.webm`)
@@ -91,7 +91,12 @@ export class Record extends React.Component {
     videoWebmRef.put(file).then(function(snapshot) {
       console.log('Uploaded blob or file!')
     })
-    this.props.addNewRecording({video: videoWebmRef.fullPath})
+    this.props.addNewRecording({
+      video: videoWebmRef.fullPath,
+      slouch: slouch,
+      transcript: transcript,
+      fillerCount: fillerCount
+    })
     console.log('videoWebmReb.fullPath type:', typeof videoWebmRef.fullPath)
   }
 
@@ -135,7 +140,7 @@ export class Record extends React.Component {
         video: true
       }
 
-      var video = this.refs.vidRef
+      let video = this.refs.vidRef
 
       navigator.mediaDevices
         .getUserMedia(rtcSession)
@@ -163,7 +168,6 @@ export class Record extends React.Component {
     }
 
     const realStopRecording = () => {
-      console.log('this', this)
       let that = this
       this.props.abortListening()
       let count = 0
@@ -185,6 +189,7 @@ export class Record extends React.Component {
       }
 
       console.log('NOT FILTERED TRANSCRIPT: ', this.props.transcript)
+      let transcript = this.props.transcript
       console.log('FILLER WORD COUNT: ', count)
       console.log('FILLER WORDS USED: ', fillerWordsUsed)
       this.props.resetTranscript()
@@ -197,9 +202,9 @@ export class Record extends React.Component {
 
           //this is where *we think* we will pass our 'videoBlob' up to Firebase Storage somehow, to then get a "link", to then store in our database
           // console.log("this", this)
-          that.putVideoInFirebase(videoBlob)
+          that.putVideoInFirebase(videoBlob, 0, transcript, count)
           // --> command to download as a file
-          invokeSaveAsDialog(videoBlob)
+          //invokeSaveAsDialog(videoBlob)
 
           recorder.stream.stop()
         })

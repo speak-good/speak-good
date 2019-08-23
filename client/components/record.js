@@ -78,14 +78,14 @@ export class Record extends React.Component {
   }
 
   putVideoInFirebase = video => {
-    var storageRef = firebase.storage().ref()
-    var date = Date.now()
-    var videoRef = storageRef.child(`${date}.webm`)
-    var videoWebmRef = storageRef.child(
+    let storageRef = firebase.storage().ref()
+    let date = Date.now()
+    let videoRef = storageRef.child(`${date}.webm`)
+    let videoWebmRef = storageRef.child(
       `${this.props.defaultUser.id}/${date}.webm`
     )
     console.log('videoWebmRef', videoWebmRef)
-    var file = video
+    let file = video
     videoWebmRef.put(file).then(function(snapshot) {
       console.log('Uploaded blob or file!')
     })
@@ -162,7 +162,7 @@ export class Record extends React.Component {
 
     const realStopRecording = () => {
       console.log('this', this)
-      var that = this
+      let that = this
       this.props.abortListening()
       let count = 0
       let fillerWordsUsed = []

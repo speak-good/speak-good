@@ -13,6 +13,9 @@ const Recording = db.define('recording', {
   },
   fillerCount: {
     type: Sequelize.INTEGER
+  },
+  grade: {
+    type: Sequelize.STRING
   }
 })
 

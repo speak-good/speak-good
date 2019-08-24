@@ -28,6 +28,20 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const recordings = await Recording.destroy({
+      where: {
+        id: req.params.id,
+        userId: req.user.id
+      }
+    })
+    res.json(recordings)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const {video, slouch, transcript, fillerCount} = req.body

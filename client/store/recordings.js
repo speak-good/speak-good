@@ -6,7 +6,7 @@ import axios from 'axios'
 const GET_ALL_RECORDING = 'GET_ALL_RECORDING'
 const GET_RECORDING = 'GET_RECORDING'
 const ADD_RECORDING = 'ADD_RECORDING'
-
+const DELETE_RECORDING = 'DELETE_RECORDING'
 /**
  * INITIAL STATE
  */
@@ -32,6 +32,10 @@ const addRecording = recording => ({
   recording
 })
 
+const removeRecording = recordingId => ({
+  type: DELETE_RECORDING,
+  recordingId
+})
 /**
  * THUNK CREATORS
  */
@@ -63,6 +67,15 @@ export const addNewRecording = recording => async dispatch => {
   }
 }
 
+export const deleteRecording = recordingId => async dispatch => {
+  try {
+    dispatch(removeRecording(recordingId))
+    await axios.delete(`/api/recordings/${recordingId}`)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -74,6 +87,13 @@ export default function(state = initialState, action) {
       return {...state, singleRecording: action.singleRecording}
     case ADD_RECORDING:
       return {...state, allRecording: [...state.allRecording, action.recording]}
+    case DELETE_RECORDING:
+      return {
+        ...state,
+        allRecording: state.allRecording.filter(
+          recording => recording.id !== action.recordingId
+        )
+      }
     default:
       return state
   }

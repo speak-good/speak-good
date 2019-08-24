@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {fetchRecordings} from '../store/recordings'
+import {fetchRecordings, deleteRecording} from '../store/recordings'
 // import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -7,6 +7,10 @@ import {Link} from 'react-router-dom'
 class UserProfile extends Component {
   componentDidMount() {
     this.props.fetchRecordings()
+  }
+
+  handleClick(recording) {
+    this.props.deleteRecording(recording)
   }
 
   previewTranscript(fullTranscript) {
@@ -54,6 +58,12 @@ class UserProfile extends Component {
           {allRecording.map(recording => (
             <div className="campus card" key={recording.id}>
               <div className="card-body">
+                <button
+                  type="button"
+                  onClick={() => this.handleClick(recording.id)}
+                >
+                  X
+                </button>
                 <Link to={`/recordings/${recording.id}`}>
                   <h3 className="details">{recording.grade}</h3>
                   <h3 className="details">
@@ -85,6 +95,9 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchRecordings: function() {
       dispatch(fetchRecordings())
+    },
+    deleteRecording: function(recording) {
+      dispatch(deleteRecording(recording))
     }
   }
 }

@@ -10,6 +10,7 @@ import SingleRecording from './components/singleRecording'
 import TrainingSinglePose from './components/trainingSinglePose'
 import {me} from './store'
 import UserProfile from './components/UserProfile'
+import NotFound from './components/notFound'
 
 /**
  * COMPONENT
@@ -33,10 +34,11 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route exact path="/recordings" component={Recordings} />
+            {/* <Route exact path="/recordings" component={Recordings} /> */}
             <Route exact path="/profile" component={UserProfile} />
             <Route exact path="/record" component={Record} />
             <Route exact path="/recordings/:id" component={SingleRecording} />
+            <Route path="*" component={NotFound} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

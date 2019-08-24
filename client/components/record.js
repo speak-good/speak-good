@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import SpeechRecognition from 'react-speech-recognition'
-
+import {Link} from 'react-router-dom'
 import firebase from 'firebase'
 import firebaseConfig from '../../secrets'
 import {addNewRecording} from '../store/recordings'
@@ -65,6 +65,9 @@ let recorder
 export class Record extends React.Component {
   constructor() {
     super()
+    this.state = {
+      videoBlob: ''
+    }
     this.putVideoInFirebase = this.putVideoInFirebase.bind(this)
     this.initializeFirebase = this.initializeFirebase.bind(this)
   }
@@ -199,12 +202,12 @@ export class Record extends React.Component {
         .then(async function() {
           console.info('stopRecording success')
           let videoBlob = await recorder.getBlob()
-
+          that.setState({videoBlob})
           //this is where *we think* we will pass our 'videoBlob' up to Firebase Storage somehow, to then get a "link", to then store in our database
           // console.log("this", this)
           that.putVideoInFirebase(videoBlob, 0, transcript, count)
           // --> command to download as a file
-          //invokeSaveAsDialog(videoBlob)
+          // invokeSaveAsDialog(videoBlob)
 
           recorder.stream.stop()
         })
@@ -228,6 +231,15 @@ export class Record extends React.Component {
         </button>
         <button id="stop" ref="stop" onClick={realStopRecording}>
           Stop Recording
+        </button>
+        <Link to="/recordings">
+          <h3>My Recordings</h3>
+        </Link>
+        <button
+          id="btn-view-results"
+          onClick={() => invokeSaveAsDialog(this.state.videoBlob)}
+        >
+          Download
         </button>
         <hr />
       </div>

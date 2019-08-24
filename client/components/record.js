@@ -14,8 +14,7 @@ const propTypes = {
 }
 
 const options = {
-  autoStart: false,
-  continuous: false
+  autoStart: false
 }
 
 const fillerWords = {
@@ -120,6 +119,7 @@ export class Record extends React.Component {
       startListening
     } = this.props
     const startRecording = () => {
+      this.props.resetTranscript()
       this.props.startListening()
       let isMimeTypeSupported = _mimeType => {
         if (typeof MediaRecorder.isTypeSupported !== 'function') {
@@ -277,7 +277,7 @@ export class Record extends React.Component {
         <button id="stop" ref="stop" onClick={realStopRecording}>
           Stop Recording
         </button>
-        <button id="reset" ref="reset" onClick={resetRecording}>
+        <button id="reset" ref="reset" onClick={() => resetRecording()}>
           Reset
         </button>
         <button

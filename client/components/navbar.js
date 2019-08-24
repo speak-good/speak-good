@@ -17,15 +17,15 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <div className="nav-item">
             <Link to="/record">Record</Link>
           </div>
-          <div className="nav-item">
+          {/* <div className="nav-item">
             <Link to="/recordings">Recordings</Link>
-          </div>
+          </div> */}
           <div className="nav-item">
             <Link to="/profile">Profile</Link>
           </div>
-          <div className="nav-item">
+          {/* <div className="nav-item">
             <Link to="/home">Home</Link>
-          </div>
+          </div> */}
           <div className="nav-item">
             <a href="#" onClick={handleClick}>
               Logout

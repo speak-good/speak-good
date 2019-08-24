@@ -137,6 +137,7 @@ export class SingleRecording extends React.Component {
       }
       return wordsUsed
     }
+
     return (
       <div>
         <br />

@@ -14,7 +14,8 @@ const propTypes = {
 }
 
 const options = {
-  autoStart: false
+  autoStart: false,
+  continuous: false
 }
 
 const fillerWords = {
@@ -66,7 +67,11 @@ export class Record extends React.Component {
   constructor() {
     super()
     this.state = {
-      videoBlob: ''
+      videoBlob: '',
+      slouch: 0,
+      transcript: '',
+      fillerCount: 0,
+      grade: ''
     }
     this.putVideoInFirebase = this.putVideoInFirebase.bind(this)
     this.initializeFirebase = this.initializeFirebase.bind(this)
@@ -82,7 +87,7 @@ export class Record extends React.Component {
     this.initializeFirebase()
   }
 
-  putVideoInFirebase = (video, slouch, transcript, fillerCount) => {
+  putVideoInFirebase = video => {
     let storageRef = firebase.storage().ref()
     let date = Date.now()
     let videoRef = storageRef.child(`${date}.webm`)
@@ -96,9 +101,10 @@ export class Record extends React.Component {
     })
     this.props.addNewRecording({
       video: videoWebmRef.fullPath,
-      slouch: slouch,
-      transcript: transcript,
-      fillerCount: fillerCount
+      slouch: this.state.slouch,
+      transcript: this.state.transcript,
+      fillerCount: this.state.fillerCount,
+      grade: this.state.grade
     })
     console.log('videoWebmReb.fullPath type:', typeof videoWebmRef.fullPath)
   }
@@ -173,6 +179,7 @@ export class Record extends React.Component {
     const realStopRecording = () => {
       let that = this
       this.props.abortListening()
+      this.props.stopListening()
       let count = 0
       let fillerWordsUsed = []
       let realTranscript = this.props.transcript
@@ -192,7 +199,6 @@ export class Record extends React.Component {
       }
 
       console.log('NOT FILTERED TRANSCRIPT: ', this.props.transcript)
-      let transcript = this.props.transcript
       console.log('FILLER WORD COUNT: ', count)
       console.log('FILLER WORDS USED: ', fillerWordsUsed)
       this.props.resetTranscript()
@@ -202,10 +208,24 @@ export class Record extends React.Component {
         .then(async function() {
           console.info('stopRecording success')
           let videoBlob = await recorder.getBlob()
-          that.setState({videoBlob})
+          const gradeCalc = count => {
+            if (count <= 3) return 'A'
+            if (count > 3 && count <= 6) return 'B'
+            if (count > 6 && count <= 10) return 'C'
+            if (count > 10 && count <= 15) return 'D'
+            else return 'F'
+          }
+          let myGrade = gradeCalc(count)
+          that.setState({
+            videoBlob,
+            slouch: 0,
+            transcript: realTranscript,
+            fillerCount: count,
+            grade: myGrade
+          })
           //this is where *we think* we will pass our 'videoBlob' up to Firebase Storage somehow, to then get a "link", to then store in our database
           // console.log("this", this)
-          that.putVideoInFirebase(videoBlob, 0, transcript, count)
+          // that.putVideoInFirebase(videoBlob)
           // --> command to download as a file
           // invokeSaveAsDialog(videoBlob)
 
@@ -215,6 +235,31 @@ export class Record extends React.Component {
           console.error('stopRecording failure', error)
         })
     }
+
+    const resetRecording = () => {
+      let that = this
+      this.props.abortListening()
+      this.props.stopListening()
+      let count = 0
+      let fillerWordsUsed = []
+      let realTranscript = this.props.transcript
+      let transcriptArr = realTranscript.split(' ')
+
+      let transcript = this.props.transcript
+
+      this.props.resetTranscript()
+
+      this.setState({
+        videoBlob: '',
+        slouch: 0,
+        transcript: '',
+        fillerCount: 0,
+        grade: ''
+      })
+
+      recorder.reset()
+    }
+
     return (
       <div>
         <br />
@@ -231,6 +276,16 @@ export class Record extends React.Component {
         </button>
         <button id="stop" ref="stop" onClick={realStopRecording}>
           Stop Recording
+        </button>
+        <button id="reset" ref="reset" onClick={resetRecording}>
+          Reset
+        </button>
+        <button
+          id="save"
+          ref="save"
+          onClick={() => this.putVideoInFirebase(this.state.videoBlob)}
+        >
+          SAVE Recording
         </button>
         <Link to="/recordings">
           <h3>My Recordings</h3>

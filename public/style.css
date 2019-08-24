@@ -251,3 +251,14 @@ section h2:after {
   padding-top: 250px;
   text-align: center;
 }
+
+.profile-body {
+  padding-top: 100px;
+  text-align: left;
+  padding-left: 100px;
+}
+
+.startnew {
+  /* width: 100px;
+  height: 100px; */
+}

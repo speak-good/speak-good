@@ -11,15 +11,6 @@ const Home = props => {
   console.log(props)
   return (
     <div>
-      {user.id ? (
-        <div>
-          <div className="user-log">Welcome back {user.email}</div>
-          <Button className="button button-margin-left" onClick={handleClick}>
-            Logout
-          </Button>
-        </div>
-      ) : null}
-
       <div className="banner">
         <Content />
       </div>

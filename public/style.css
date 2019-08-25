@@ -239,6 +239,20 @@ section h2:after {
   border-radius: 10px;
 }
 
+#google-oauth-button {
+  width: 100px;
+  height: 40px;
+  background-color: red;
+  color: white;
+  font-size: 10pt;
+  border-radius: 10px;
+}
+
+.google-oauth {
+  display: flex;
+  justify-content: center;
+}
+
 #nav-trio,
 #navbar {
   margin-top: 8px;

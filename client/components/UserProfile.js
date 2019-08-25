@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {fetchRecordings} from '../store/recordings'
-// import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
@@ -35,35 +34,55 @@ class UserProfile extends Component {
       let day = unformattedDate.slice(8, 10)
       return months[month] + ' ' + day + ', ' + year
     }
-
     const {allRecording} = this.props.recordings
-    console.log('whats inhere', this.props)
+    console.log('PROPS ARE: ', this.props)
     return (
       <div className="profile-body">
-        <h3>Welcome back {this.props.email}</h3>
+        <h3>Welcome back, {this.props.firstName}</h3>
         <div id="recordingList">
-          <div id="startnew">
-            <Link to="/record">
-              <h2>START NEW RECORDING</h2>
-            </Link>
-            <Link to="/train/MountainPose">
-              <h2>Practice Power Pose</h2>
-            </Link>
+          <div id="profile-buttons-container">
+            <div>
+              <Link to="/record">
+                <button
+                  id="profile-button-padding"
+                  type="button"
+                  className="profile-buttons"
+                >
+                  Start New Recording
+                </button>
+              </Link>
+            </div>
+            <div>
+              <Link to="/train/MountainPose">
+                <button
+                  id="profile-button-padding"
+                  type="button"
+                  className="profile-buttons"
+                >
+                  Practice Power Pose
+                </button>
+              </Link>
+            </div>
           </div>
-          <h3>Past Recordings</h3>
+          <h3>Your Past Recordings:</h3>
           {allRecording.map(recording => (
             <div className="campus card" key={recording.id}>
-              <div className="card-body">
+              <div>
                 <Link to={`/recordings/${recording.id}`}>
-                  <h3 className="details">{recording.grade}</h3>
-                  <h3 className="details">
-                    {' '}
-                    Date created: {formattedDate(recording.createdAt)}{' '}
-                  </h3>
-                  <h3 className="details">
-                    Preview: {this.previewTranscript(recording.transcript)}
-                  </h3>
-                  <h3 className="details">See Results</h3>
+                  <button type="button" className="past-recordings">
+                    <div id="button-container">
+                      <div id="grade">
+                        <p>{recording.grade}</p>
+                      </div>
+                      <div id="details">
+                        <p>Date: {formattedDate(recording.createdAt)}</p>
+                        <p>
+                          Preview:{' '}
+                          {this.previewTranscript(recording.transcript)}
+                        </p>
+                      </div>
+                    </div>
+                  </button>
                 </Link>
               </div>
             </div>
@@ -77,6 +96,7 @@ class UserProfile extends Component {
 function mapStateToProps(state) {
   return {
     email: state.user.email,
+    firstName: state.user.firstName,
     recordings: state.recordings
   }
 }

@@ -258,7 +258,43 @@ section h2:after {
   padding-left: 100px;
 }
 
-.startnew {
-  /* width: 100px;
-  height: 100px; */
+#vidRef {
+  width: 650px;
+  height: 450px;
+  margin-right: 25px;
+}
+#record-page {
+  text-align: center;
+}
+#recording-container {
+  display: flex;
+  justify-content: center;
+}
+.vid-button {
+  width: 180px;
+  background-color: white;
+  color: #3412f3;
+  border-color: #3412f3;
+  font-size: 12pt;
+  border-width: 3px;
+  height: 60px;
+  border-radius: 8px;
+  margin: 45px 20px 20px 20px;
+}
+#button-container {
+  display: flexbox;
+  flex-direction: column;
+  justify-items: center;
+}
+#results {
+  background-color: #01baef;
+  color: white;
+  width: 250px;
+  height: 100px;
+  border-color: white;
+  font-size: 20pt;
+}
+#middle {
+  background-color: #3412f3;
+  color: white;
 }

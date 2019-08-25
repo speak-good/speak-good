@@ -254,7 +254,7 @@ section h2:after {
 
 .profile-body {
   padding-top: 100px;
-  text-align: left;
+  text-align: center;
   padding-left: 100px;
 }
 
@@ -297,4 +297,74 @@ section h2:after {
 #middle {
   background-color: #3412f3;
   color: white;
+}
+.profile-buttons {
+  width: 180px;
+  background-color: white;
+  color: #3412f3;
+  border-color: #3412f3;
+  font-size: 12pt;
+  border-width: 3px;
+  height: 60px;
+  border-radius: 8px;
+}
+#profile-buttons-container {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+}
+#profile-button-padding {
+  margin: 15px;
+}
+.past-recordings {
+  width: 500px;
+  background-color: #3412f3;
+  color: white;
+  border-color: white;
+  font-size: 12pt;
+  border-width: 5px;
+  height: 120px;
+  border-radius: 15px;
+}
+#button-container {
+  display: flex;
+  flex-direction: row;
+  /* align-content: space-between; */
+}
+#grade p {
+  font-size: 40pt;
+  margin: 5px 60px 5px 25px;
+}
+#details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+#details p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+#delete-button {
+  color: red;
+}
+
+#center {
+  display: flex;
+}
+#flex {
+  display: flex;
+}
+
+#map-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#top-margin {
+  padding-top: 100px;
+}
+
+#past-recordings-header {
+  text-align: center;
 }

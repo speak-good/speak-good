@@ -39,42 +39,66 @@ class UserProfile extends Component {
       let day = unformattedDate.slice(8, 10)
       return months[month] + ' ' + day + ', ' + year
     }
-
     const {allRecording} = this.props.recordings
-    console.log('whats inhere', this.props)
     return (
-      <div className="profile-body">
-        <h3>Welcome back {this.props.email}</h3>
-        <div id="recordingList">
-          <div id="startnew">
+      <div id="top-margin">
+        <h2 id="past-recordings-header">
+          Welcome back, {this.props.firstName}
+        </h2>
+        <div id="profile-buttons-container">
+          <div>
             <Link to="/record">
-              <h2>START NEW RECORDING</h2>
-            </Link>
-            <Link to="/train/MountainPose">
-              <h2>Practice Power Pose</h2>
+              <button
+                id="profile-button-padding"
+                type="button"
+                className="profile-buttons"
+              >
+                Start New Recording
+              </button>
             </Link>
           </div>
-          <h3>Past Recordings</h3>
+          <div>
+            <Link to="/train/MountainPose">
+              <button
+                id="profile-button-padding"
+                type="button"
+                className="profile-buttons"
+              >
+                Practice Power Pose
+              </button>
+            </Link>
+          </div>
+        </div>
+        <h3 id="past-recordings-header">Your Past Recordings:</h3>
+        <div id="map-container">
           {allRecording.map(recording => (
-            <div className="campus card" key={recording.id}>
-              <div className="card-body">
-                <button
-                  type="button"
-                  onClick={() => this.handleClick(recording.id)}
-                >
-                  X
-                </button>
-                <Link to={`/recordings/${recording.id}`}>
-                  <h3 className="details">{recording.grade}</h3>
-                  <h3 className="details">
-                    {' '}
-                    Date created: {formattedDate(recording.createdAt)}{' '}
-                  </h3>
-                  <h3 className="details">
-                    Preview: {this.previewTranscript(recording.transcript)}
-                  </h3>
-                  <h3 className="details">See Results</h3>
-                </Link>
+            <div key={recording.id}>
+              <div>
+                <div className="card-body">
+                  <button
+                    id="delete-button"
+                    type="button"
+                    onClick={() => this.handleClick(recording.id)}
+                  >
+                    X
+                  </button>
+                  <Link to={`/recordings/${recording.id}`}>
+                    <button type="button" className="past-recordings">
+                      <div id="button-container">
+                        <div id="grade">
+                          <p>{recording.grade}</p>
+                        </div>
+                        <div id="details">
+                          <p>Date: {formattedDate(recording.createdAt)}</p>
+                          <p>
+                            Preview:{' '}
+                            {this.previewTranscript(recording.transcript)}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
@@ -87,6 +111,7 @@ class UserProfile extends Component {
 function mapStateToProps(state) {
   return {
     email: state.user.email,
+    firstName: state.user.firstName,
     recordings: state.recordings
   }
 }

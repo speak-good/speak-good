@@ -287,35 +287,40 @@ export class Record extends React.Component {
             <video id="vidRef" ref="vidRef" controls autoPlay />
           </div>
           <div id="button-container">
-            <button className="vid-button" onClick={startRecording}>
-              Start Recording
-            </button>
-            <button
-              id="stop"
-              className="vid-button"
-              ref="stop"
-              onClick={realStopRecording}
-            >
-              Stop Recording
-            </button>
+            <div id="flex">
+              <button className="vid-button" onClick={startRecording}>
+                Start Recording
+              </button>
+              <button
+                id="stop"
+                className="vid-button"
+                ref="stop"
+                onClick={realStopRecording}
+              >
+                Stop Recording
+              </button>
+            </div>
+
             {this.state.linkOut ? (
-              <div id="center">
-                <button
-                  id="middle"
-                  className="vid-button"
-                  ref="reset"
-                  onClick={() => resetRecording()}
-                >
-                  Reset Recording
-                </button>
-                <button
-                  id="middle"
-                  className="vid-button"
-                  ref="save"
-                  onClick={() => saveRecording()}
-                >
-                  Save Recording
-                </button>
+              <div>
+                <div id="center">
+                  <button
+                    id="middle"
+                    className="vid-button"
+                    ref="reset"
+                    onClick={() => resetRecording()}
+                  >
+                    Reset Recording
+                  </button>
+                  <button
+                    id="middle"
+                    className="vid-button"
+                    ref="save"
+                    onClick={() => saveRecording()}
+                  >
+                    Save Recording
+                  </button>
+                </div>
 
                 {this.state.save ? (
                   <div>

@@ -1,11 +1,16 @@
 import React, {Component} from 'react'
-import {fetchRecordings} from '../store/recordings'
+import {fetchRecordings, deleteRecording} from '../store/recordings'
+// import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 class UserProfile extends Component {
   componentDidMount() {
     this.props.fetchRecordings()
+  }
+
+  handleClick(recording) {
+    this.props.deleteRecording(recording)
   }
 
   previewTranscript(fullTranscript) {
@@ -35,7 +40,6 @@ class UserProfile extends Component {
       return months[month] + ' ' + day + ', ' + year
     }
     const {allRecording} = this.props.recordings
-    console.log('PROPS ARE: ', this.props)
     return (
       <div className="profile-body">
         <h3>Welcome back, {this.props.firstName}</h3>
@@ -68,22 +72,30 @@ class UserProfile extends Component {
           {allRecording.map(recording => (
             <div className="campus card" key={recording.id}>
               <div>
-                <Link to={`/recordings/${recording.id}`}>
-                  <button type="button" className="past-recordings">
-                    <div id="button-container">
-                      <div id="grade">
-                        <p>{recording.grade}</p>
-                      </div>
-                      <div id="details">
-                        <p>Date: {formattedDate(recording.createdAt)}</p>
-                        <p>
-                          Preview:{' '}
-                          {this.previewTranscript(recording.transcript)}
-                        </p>
-                      </div>
-                    </div>
+                <div className="card-body">
+                  <button
+                    type="button"
+                    onClick={() => this.handleClick(recording.id)}
+                  >
+                    X
                   </button>
-                </Link>
+                  <Link to={`/recordings/${recording.id}`}>
+                    <button type="button" className="past-recordings">
+                      <div id="button-container">
+                        <div id="grade">
+                          <p>{recording.grade}</p>
+                        </div>
+                        <div id="details">
+                          <p>Date: {formattedDate(recording.createdAt)}</p>
+                          <p>
+                            Preview:{' '}
+                            {this.previewTranscript(recording.transcript)}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
@@ -105,6 +117,9 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchRecordings: function() {
       dispatch(fetchRecordings())
+    },
+    deleteRecording: function(recording) {
+      dispatch(deleteRecording(recording))
     }
   }
 }

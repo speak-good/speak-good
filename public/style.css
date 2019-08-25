@@ -310,7 +310,7 @@ section h2:after {
 }
 #profile-buttons-container {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
 }
 #profile-button-padding {
@@ -328,8 +328,8 @@ section h2:after {
 }
 #button-container {
   display: flex;
-  flex-direction: column;
-  align-content: space-between;
+  flex-direction: row;
+  /* align-content: space-between; */
 }
 #grade p {
   font-size: 40pt;
@@ -344,10 +344,27 @@ section h2:after {
   margin-top: 8px;
   margin-bottom: 8px;
 }
+#delete-button {
+  color: red;
+}
 
 #center {
   display: flex;
 }
 #flex {
   display: flex;
+}
+
+#map-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#top-margin {
+  padding-top: 100px;
+}
+
+#past-recordings-header {
+  text-align: center;
 }

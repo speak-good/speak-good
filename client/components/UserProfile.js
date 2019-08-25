@@ -41,39 +41,42 @@ class UserProfile extends Component {
     }
     const {allRecording} = this.props.recordings
     return (
-      <div className="profile-body">
-        <h3>Welcome back, {this.props.firstName}</h3>
-        <div id="recordingList">
-          <div id="profile-buttons-container">
-            <div>
-              <Link to="/record">
-                <button
-                  id="profile-button-padding"
-                  type="button"
-                  className="profile-buttons"
-                >
-                  Start New Recording
-                </button>
-              </Link>
-            </div>
-            <div>
-              <Link to="/train/MountainPose">
-                <button
-                  id="profile-button-padding"
-                  type="button"
-                  className="profile-buttons"
-                >
-                  Practice Power Pose
-                </button>
-              </Link>
-            </div>
+      <div id="top-margin">
+        <h2 id="past-recordings-header">
+          Welcome back, {this.props.firstName}
+        </h2>
+        <div id="profile-buttons-container">
+          <div>
+            <Link to="/record">
+              <button
+                id="profile-button-padding"
+                type="button"
+                className="profile-buttons"
+              >
+                Start New Recording
+              </button>
+            </Link>
           </div>
-          <h3>Your Past Recordings:</h3>
+          <div>
+            <Link to="/train/MountainPose">
+              <button
+                id="profile-button-padding"
+                type="button"
+                className="profile-buttons"
+              >
+                Practice Power Pose
+              </button>
+            </Link>
+          </div>
+        </div>
+        <h3 id="past-recordings-header">Your Past Recordings:</h3>
+        <div id="map-container">
           {allRecording.map(recording => (
-            <div className="campus card" key={recording.id}>
+            <div key={recording.id}>
               <div>
                 <div className="card-body">
                   <button
+                    id="delete-button"
                     type="button"
                     onClick={() => this.handleClick(recording.id)}
                   >

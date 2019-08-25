@@ -310,6 +310,7 @@ section h2:after {
 }
 #profile-buttons-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 #profile-button-padding {
@@ -327,7 +328,7 @@ section h2:after {
 }
 #button-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-content: space-between;
 }
 #grade p {
@@ -342,4 +343,11 @@ section h2:after {
 #details p {
   margin-top: 8px;
   margin-bottom: 8px;
+}
+
+#center {
+  display: flex;
+}
+#flex {
+  display: flex;
 }

@@ -70,7 +70,9 @@ export class Record extends React.Component {
       slouch: 0,
       transcript: '',
       fillerCount: 0,
-      grade: ''
+      grade: '',
+      linkOut: false,
+      save: false
     }
     this.putVideoInFirebase = this.putVideoInFirebase.bind(this)
     this.initializeFirebase = this.initializeFirebase.bind(this)
@@ -119,6 +121,10 @@ export class Record extends React.Component {
       startListening
     } = this.props
     const startRecording = () => {
+      this.setState({
+        linkOut: false,
+        save: false
+      })
       this.props.resetTranscript()
       this.props.startListening()
       let isMimeTypeSupported = _mimeType => {
@@ -221,7 +227,8 @@ export class Record extends React.Component {
             slouch: 0,
             transcript: realTranscript,
             fillerCount: count,
-            grade: myGrade
+            grade: myGrade,
+            linkOut: true
           })
           //this is where *we think* we will pass our 'videoBlob' up to Firebase Storage somehow, to then get a "link", to then store in our database
           // console.log("this", this)
@@ -254,49 +261,85 @@ export class Record extends React.Component {
         slouch: 0,
         transcript: '',
         fillerCount: 0,
-        grade: ''
+        grade: '',
+        linkOut: false
       })
 
       recorder.reset()
     }
 
+    const saveRecording = () => {
+      this.setState({save: true})
+      this.putVideoInFirebase(this.state.videoBlob)
+    }
+
     return (
-      <div>
+      <div id="record-page">
         <br />
         <br />
         <br />
         <br />
         <br />
         <br />
-        <h3>Recording Page</h3>
-        <video id="vidRef" ref="vidRef" controls autoPlay />
-        <br />
-        <button id="btn-start-recording" onClick={startRecording}>
-          Start Recording
-        </button>
-        <button id="stop" ref="stop" onClick={realStopRecording}>
-          Stop Recording
-        </button>
-        <button id="reset" ref="reset" onClick={() => resetRecording()}>
-          Reset
-        </button>
-        <button
-          id="save"
-          ref="save"
-          onClick={() => this.putVideoInFirebase(this.state.videoBlob)}
-        >
-          SAVE Recording
-        </button>
-        <Link to="/recordings">
-          <h3>My Recordings</h3>
-        </Link>
-        <button
-          id="btn-view-results"
-          onClick={() => invokeSaveAsDialog(this.state.videoBlob)}
-        >
-          Download
-        </button>
-        <hr />
+        <h2>Ready, Set, Action!</h2>
+        <div id="recording-container">
+          <div>
+            <video id="vidRef" ref="vidRef" controls autoPlay />
+          </div>
+          <div id="button-container">
+            <button className="vid-button" onClick={startRecording}>
+              Start Recording
+            </button>
+            <button
+              id="stop"
+              className="vid-button"
+              ref="stop"
+              onClick={realStopRecording}
+            >
+              Stop Recording
+            </button>
+            {this.state.linkOut ? (
+              <div id="center">
+                <button
+                  id="middle"
+                  className="vid-button"
+                  ref="reset"
+                  onClick={() => resetRecording()}
+                >
+                  Reset Recording
+                </button>
+                <button
+                  id="middle"
+                  className="vid-button"
+                  ref="save"
+                  onClick={() => saveRecording()}
+                >
+                  Save Recording
+                </button>
+
+                {this.state.save ? (
+                  <div>
+                    <Link to="/profile">
+                      <button id="results" className="vid-button">
+                        View Your Results
+                      </button>
+                    </Link>
+                    {/* <button
+                      className="vid-button"
+                      onClick={() => invokeSaveAsDialog(this.state.videoBlob)}
+                    >
+                      Download Recording
+                    </button> */}
+                  </div>
+                ) : (
+                  ''
+                )}
+              </div>
+            ) : (
+              ''
+            )}
+          </div>
+        </div>
       </div>
     )
   }

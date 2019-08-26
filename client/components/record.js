@@ -329,12 +329,6 @@ export class Record extends React.Component {
                         View Your Results
                       </button>
                     </Link>
-                    {/* <button
-                      className="vid-button"
-                      onClick={() => invokeSaveAsDialog(this.state.videoBlob)}
-                    >
-                      Download Recording
-                    </button> */}
                   </div>
                 ) : (
                   ''

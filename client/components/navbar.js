@@ -8,7 +8,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <header>
     <div className="logo">
       <Link to="/">
-        <img alt="logo" src="images/logo.png" />
+        <img alt="logo" src="https://i.imgur.com/jAdj9Td.png" />
       </Link>
     </div>
     <div id="navbar">

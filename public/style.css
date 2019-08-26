@@ -332,7 +332,11 @@ section h2:after {
   border-radius: 8px;
   margin: 45px 20px 20px 20px;
 }
-#button-container,
+#button-container {
+  display: flexbox;
+  flex-direction: column;
+  justify-items: center;
+}
 .referImg {
   display: flexbox;
   flex-direction: column;
@@ -362,7 +366,7 @@ section h2:after {
 }
 #profile-buttons-container {
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column;
   justify-content: center;
 }
 #profile-button-padding {
@@ -380,7 +384,7 @@ section h2:after {
 }
 #button-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   /* align-content: space-between; */
 }
 #grade p {

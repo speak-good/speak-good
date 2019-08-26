@@ -279,8 +279,6 @@ export class Record extends React.Component {
         <br />
         <br />
         <br />
-        <br />
-        <br />
         <h2>Ready, Set, Action!</h2>
         <div id="recording-container">
           <div>

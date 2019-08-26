@@ -71,7 +71,8 @@ class UserProfile extends Component {
     return (
       <div id="top-margin">
         <h2 id="past-recordings-header">
-          Welcome back, {this.props.firstName}
+          Welcome back
+          {!this.props.firstName ? '!' : `, ${this.props.firstName}`}
         </h2>
         <div id="profile-buttons-container">
           <div>
@@ -97,22 +98,26 @@ class UserProfile extends Component {
             </Link>
           </div>
         </div>
-        <h3 id="past-recordings-header">Your Past Recordings:</h3>
-        <div id="map-container">
-          {allRecording.map(recording => (
-            <div key={recording.id}>
-              <div>
-                <div className="card-body">
-                  <button
-                    id="delete-button"
-                    type="button"
-                    onClick={() => this.handleClick(recording)}
-                  >
-                    X
-                  </button>
-                  <Link to={`/recordings/${recording.id}`}>
-                    <button type="button" className="past-recordings">
-                      <div id="button-container">
+        <h2 id="past-recordings-header">Your Past Recordings:</h2>
+        {allRecording.length === 0 ? (
+          <div id="no-past-recordings">None</div>
+        ) : (
+          <div id="map-container">
+            {allRecording.map(recording => (
+              <div key={recording.id}>
+                <div>
+                  <div className="card-body">
+                    <button
+                      id="delete-button"
+                      type="button"
+                      onClick={() => this.handleClick(recording)}
+                    >
+                      X
+                    </button>
+                    <Link to={`/recordings/${recording.id}`}>
+                      <button type="button" className="past-recordings">
+                        {/* <div id="button-container"> */}
+                        {/* <div> */}
                         <div id="grade">
                           <p>{recording.grade}</p>
                         </div>
@@ -123,14 +128,15 @@ class UserProfile extends Component {
                             {this.previewTranscript(recording.transcript)}
                           </p>
                         </div>
-                      </div>
-                    </button>
-                  </Link>
+                        {/* </div> */}
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     )
   }

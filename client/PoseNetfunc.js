@@ -64,7 +64,7 @@ export function poseDetectionFrame(
           outputStride
         )
         poses.push(pose)
-        let refPoses = ['powerpose']
+        let refPoses = ['powerpose', 'powerpose2']
 
         let index = refPoses.indexOf(poseName)
 

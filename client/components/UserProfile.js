@@ -58,7 +58,7 @@ class UserProfile extends Component {
             </Link>
           </div>
           <div>
-            <Link to="/train/MountainPose">
+            <Link to="/train/powerpose">
               <button
                 id="profile-button-padding"
                 type="button"

@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const Content = () => {
   return (
@@ -14,7 +15,7 @@ const Content = () => {
         <h2>About</h2>
         <div className="flex">
           <p>
-            Speaking effectively is an invaluable skill that all of us want to
+            Speaking effectively is an invaluable skill that we all want to
             improve upon.<br />We believe that practice makes perfect! <br />SpeakGood
             is a platform for those who want to record and improve their public
             speaking and interview skills.
@@ -22,6 +23,25 @@ const Content = () => {
           <div id="aboutimg">
             <img src="images/interview.png" alt="interview" />
           </div>
+        </div>
+      </section>
+      <section id="power">
+        <h2>Unleash Your Power</h2>
+        <div className="flex">
+          <div id="aboutimg">
+            <img src="images/powerpose.png" alt="interview" />
+          </div>
+          <p>
+            Studies show that power poses can instantaneously give you a boost
+            in confidence and mood. <br /> Use our power pose guide to set those
+            hormonal changes in motion and get the confidence you need to ace
+            your interview!<br />
+            <Link to="/train">
+              <button className="vid-button" type="button">
+                Start Training
+              </button>
+            </Link>
+          </p>
         </div>
       </section>
       <section id="features">
@@ -34,8 +54,8 @@ const Content = () => {
             <h3 className="feature-name">Record Speech</h3>
             <p className="feature-blurb">
               An even-paced, steady speech helps retain your audience as well as
-              sound more confident. Record your speech so you can practice being
-              the best version of your self!
+              help you sound more confident. Record your speech so you can
+              practice being the best version of your self!
             </p>
           </div>
           <div className="feature-profile">
@@ -57,7 +77,7 @@ const Content = () => {
               {' '}
               We're all guilty of using "like", "so", and other conversational
               filler words. We will keep track of all your speech hesitations so
-              you can improve with time and practice!
+              you can improve over time!
             </p>
           </div>
 

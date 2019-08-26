@@ -1,12 +1,12 @@
-import {mountainNormArray, mountainFlatnormArray} from './MountainPose'
+import {powerNormArray, powerFlatnormArray} from './PowerPose'
 export let flatImageData = []
 
 flatImageData.push(
   // other potential poses,
-  mountainFlatnormArray
+  powerFlatnormArray
 )
 
-export let compareObj = [{pose: 'MountainPose', norm: mountainNormArray}]
+export let compareObj = [{pose: 'powerpose', norm: powerNormArray}]
 
 export let parts = [
   'nose',

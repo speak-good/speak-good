@@ -33,41 +33,33 @@ class TrainingSinglePose extends React.Component {
         return pose
       }
     })
-    console.log(poseUrl)
-    // eslint-disable-next-line no-return-assign
     return (
       <div>
         {!this.props.stop ? (
           <div>
             {!this.state.loadCamera ? (
-              <div className="countdownDiv">
-                <div>
-                  <h1>You are large and in charge!</h1>
-                  <br />
-                  <CountdownTimer />
-                </div>
+              <div id="countdownDiv">
+                <h1>
+                  Get ready to power up in <CountdownTimer /> seconds{' '}
+                </h1>
+                <br />
               </div>
             ) : (
-              <div className="cameraDiv">
-                {/* {(stop = null)} */}
+              <div className="powerCamDiv">
                 <br />
-                <h1>Hold the power pose!</h1>
+                <h1>
+                  Hold the power pose for <CountdownTimer /> seconds
+                </h1>
                 <br />
-                <CountdownTimer />
-                <div className="row">
-                  <div className="col col-lg-4">
-                    <img src={poseUrl[0].imageUrl} className="referImg" />
-                  </div>
-                  <div className="col col-lg-8">
-                    <Camera poseName={this.props.match.params.poseName} />
-                  </div>
+                <div className="pose">
+                  <img src={poseUrl[0].imageUrl} className="referImg" />
+                  <Camera poseName={this.props.match.params.poseName} />
                 </div>
               </div>
             )}
           </div>
         ) : (
-          <div>
-            <br />
+          <div className="powerCamDiv">
             {this.props.pose === 'BadPose' ? (
               <h1>It's okay! Just keep practicing!</h1>
             ) : (

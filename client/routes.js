@@ -7,6 +7,7 @@ import Demo from './components/demo'
 import Record from './components/record'
 import Recordings from './components/recordings'
 import SingleRecording from './components/singleRecording'
+import SelectPose from './components/training'
 import TrainingSinglePose from './components/trainingSinglePose'
 import {me} from './store'
 import UserProfile from './components/UserProfile'
@@ -29,6 +30,7 @@ class Routes extends Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/train" component={SelectPose} />
         <Route exact path="/train/:poseName" component={TrainingSinglePose} />
         <Route exact path="/demo" component={Demo} />
         {isLoggedIn && (

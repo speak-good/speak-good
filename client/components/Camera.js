@@ -64,7 +64,7 @@ class PoseNet extends Component {
         poseDetectionFrame,
         this.posenet,
         this.video,
-        'MountainPose'
+        'powerpose'
       )
     }
     setTimeout(toggleStop, 11000)

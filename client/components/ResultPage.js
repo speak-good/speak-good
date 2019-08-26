@@ -4,60 +4,48 @@ import {Link} from 'react-router-dom'
 // eslint-disable-next-line react/display-name
 export default function(props) {
   let percentage = props.percentage
+  function refreshPage() {
+    window.location.reload()
+  }
   return (
-    <div id="results">
-      <div id="resultHeading">
-        <h1>RESULTS</h1>
-      </div>
-      <div id="resultsContent">
+    <div id="powerresults">
+      <div id="powerresultsContent">
         {percentage > 70 ? (
           <div>
+            <h4>Congratulations</h4>
             <img
               className="resultImage"
-              src="https://media.giphy.com/media/1g3BfhRZ0D08yZvUqV/giphy.gif"
+              src="https://media.giphy.com/media/jQWUkD7a4AWfkraBJa/giphy.gif"
             />
-            <div className="progress-bar striped animated">
-              <span
-                className="progress-bar-green"
-                style={{width: `${percentage}%`}}
-              />
-            </div>
-            <h4>Congratulations</h4>
           </div>
         ) : 40 < percentage && percentage < 69 ? (
           <div>
+            <h4>Almost there!</h4>
             <img
               className="resultImage"
-              src="https://media.giphy.com/media/3o7TKsoVuOCiiw7Zx6/giphy.gif"
+              src="https://media.giphy.com/media/hV0pccEE0jLfelZPCC/giphy.gif"
             />
-            <div className="progress-bar striped animated">
-              <span
-                className="progress-bar-blue"
-                style={{width: `${percentage}%`}}
-              />
-            </div>
-            <h4>Keep Practicing!</h4>
           </div>
         ) : (
           <div>
+            <h4>Keep Trying!</h4>
             <img
               className="resultImage"
-              src="https://media.giphy.com/media/C1Fdach2R4HSg/giphy.gif"
+              src="https://media.giphy.com/media/hV0pccEE0jLfelZPCC/giphy.gif"
             />
-            <div className="progress-bar striped animated">
-              <span
-                className="progress-bar-red"
-                style={{width: `${percentage}%`}}
-              />
-            </div>
-            <h4>Try Again</h4>
           </div>
         )}
       </div>
 
       <div>
+        <button className="vid-button" type="button" onClick={refreshPage}>
+          {' '}
+          <span>Try Again</span>{' '}
+        </button>
         <Link to="/">
-          <button type="button">Back to homepage</button>
+          <button className="vid-button" type="button">
+            Back to homepage
+          </button>
         </Link>
         <br />
         <br />

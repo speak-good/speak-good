@@ -237,6 +237,8 @@ export class Record extends React.Component {
           // invokeSaveAsDialog(videoBlob)
 
           recorder.stream.stop()
+          let track = recorder.stream.getTracks()[0]
+          track.stop()
         })
         .catch(function(error) {
           console.error('stopRecording failure', error)

@@ -135,7 +135,14 @@ export class SingleRecording extends React.Component {
           wordsUsed.push(currPhrase)
         }
       }
-      return wordsUsed
+      wordsUsed.sort()
+      let sorted = []
+      for (let i = 0; i < wordsUsed.length; i++) {
+        if (wordsUsed[i] !== wordsUsed[i + 1]) {
+          sorted.push(wordsUsed[i])
+        }
+      }
+      return sorted
     }
 
     return (

@@ -130,6 +130,13 @@ section h2:after {
   z-index: 1;
 }
 
+.card-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
 #carousel .top-image {
   position: absolute;
   display: block;
@@ -243,7 +250,7 @@ section h2:after {
 }
 
 #auth-button {
-  width: 100px;
+  width: 200px;
   height: 40px;
   background-color: #3412f3;
   color: white;
@@ -254,8 +261,10 @@ section h2:after {
 #google-oauth-button {
   width: 100px;
   height: 40px;
-  background-color: red;
-  color: white;
+  background-color: white;
+  color: #3412f3;
+  border-color: #3412f3;
+  width: 200px;
   font-size: 10pt;
   border-radius: 10px;
 }
@@ -274,7 +283,7 @@ section h2:after {
 }
 
 #demo-title {
-  padding-top: 250px;
+  padding-top: 170px;
   text-align: center;
 }
 
@@ -295,6 +304,7 @@ section h2:after {
 #countdownDiv,
 #past-recordings-header {
   text-align: center;
+  margin-top: 70px;
 }
 
 .powerCamDiv {
@@ -334,8 +344,8 @@ section h2:after {
 }
 #button-container {
   display: flexbox;
-  flex-direction: column;
-  justify-items: center;
+  flex-direction: row;
+  /* justify-items: center; */
 }
 .referImg {
   display: flexbox;
@@ -366,13 +376,16 @@ section h2:after {
 }
 #profile-buttons-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
+  align-content: center;
 }
 #profile-button-padding {
   margin: 15px;
 }
 .past-recordings {
+  display: flex;
+  flex-direction: row;
   width: 500px;
   background-color: #3412f3;
   color: white;
@@ -381,11 +394,6 @@ section h2:after {
   border-width: 5px;
   height: 120px;
   border-radius: 15px;
-}
-#button-container {
-  display: flex;
-  flex-direction: column;
-  /* align-content: space-between; */
 }
 #grade p {
   font-size: 40pt;
@@ -402,6 +410,11 @@ section h2:after {
 }
 #delete-button {
   color: red;
+  background-color: white;
+  border-color: white;
+  font-size: 30pt;
+  margin-right: 10px;
+  display: inline;
 }
 
 #center {
@@ -432,4 +445,47 @@ section h2:after {
 #recording-container {
   display: flex;
   justify-content: center;
+}
+
+#results-container {
+  display: flex;
+}
+
+#bigger-results-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 70px;
+}
+
+#results-metrics {
+  margin-left: 70px;
+  color: black;
+  font-size: 18pt;
+}
+
+.bold {
+  color: #3412f3;
+}
+
+#no-past-recordings {
+  text-align: center;
+}
+
+#demo-container {
+  text-align: center;
+}
+#steps h5 {
+  margin: 50px;
+  font-size: 15pt;
+  text-align: center;
+}
+
+#get-started-btn {
+  background-color: #3412f3;
+  color: white;
+  width: 250px;
+  height: 100px;
+  font-size: 18pt;
+  border-radius: 10px;
 }

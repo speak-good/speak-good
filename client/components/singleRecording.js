@@ -145,15 +145,40 @@ export class SingleRecording extends React.Component {
         <br />
         <br />
         <br />
-        <h3>Your Recording Results:</h3>
-        <video controls src={this.state.video} />
-        <p>Date: {formattedDate(createdAt)}</p>
-        <p>Grade: {grade}</p>
-        <p>Number of Filler Words: {fillerCount}</p>
-        <p>Filler Words Used: </p>
-        <ul>{fillerWordsUsed(transcript).map(word => <li>{word}</li>)}</ul>
-        <p>Slouch Percentage: {slouch}%</p>
-        <p>Transcript: "{transcript}"</p>
+        <div id="bigger-results-container">
+          <h2>Your Results:</h2>
+          <div id="results-container">
+            <div>
+              <video controls src={this.state.video} />
+            </div>
+            <div id="results-metrics">
+              <p>
+                <span className="bold">Date:</span> {formattedDate(createdAt)}
+              </p>
+              <p>
+                <span className="bold">Grade:</span> {grade}
+              </p>
+              <p>
+                <span className="bold">Filler Word Count:</span> {fillerCount}
+              </p>
+              <p>
+                <span className="bold">Transcript:</span>{' '}
+                {transcript.length === 0 ? ' None' : '"' + transcript + '"'}
+              </p>
+              <p>
+                <span className="bold">Filler Words Used:</span>
+                {fillerWordsUsed(transcript).length === 0 ? (
+                  ' None'
+                ) : (
+                  <ul>
+                    {fillerWordsUsed(transcript).map(word => <li>{word}</li>)}
+                  </ul>
+                )}
+              </p>
+              {/* <p>Slouch Percentage: {slouch}%</p> */}
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

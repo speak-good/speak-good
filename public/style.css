@@ -433,3 +433,24 @@ section h2:after {
   display: flex;
   justify-content: center;
 }
+
+#results-container {
+  display: flex;
+}
+
+#bigger-results-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 70px;
+}
+
+#results-metrics {
+  margin-left: 70px;
+  color: black;
+  font-size: 18pt;
+}
+
+.bold {
+  color: #3412f3;
+}

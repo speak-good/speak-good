@@ -3,14 +3,42 @@ import {fetchRecordings, deleteRecording} from '../store/recordings'
 // import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import firebase from 'firebase'
+import firebaseConfig from '../../secrets'
 
 class UserProfile extends Component {
+  constructor() {
+    super()
+    this.initializeFirebase = this.initializeFirebase.bind(this)
+  }
+
+  initializeFirebase = () => {
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig)
+    }
+  }
+
   componentDidMount() {
     this.props.fetchRecordings()
+    this.initializeFirebase()
+  }
+
+  deleteVideoFromFirebase = video => {
+    let storageRef = firebase.storage().ref()
+    let videoRef = storageRef.child(video)
+    videoRef
+      .delete()
+      .then(function() {
+        console.log('File deleted')
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   }
 
   handleClick(recording) {
-    this.props.deleteRecording(recording)
+    this.props.deleteRecording(recording.id)
+    this.deleteVideoFromFirebase(recording.video)
   }
 
   previewTranscript(fullTranscript) {
@@ -78,7 +106,7 @@ class UserProfile extends Component {
                   <button
                     id="delete-button"
                     type="button"
-                    onClick={() => this.handleClick(recording.id)}
+                    onClick={() => this.handleClick(recording)}
                   >
                     X
                   </button>

@@ -250,7 +250,7 @@ section h2:after {
 }
 
 #auth-button {
-  width: 100px;
+  width: 200px;
   height: 40px;
   background-color: #3412f3;
   color: white;
@@ -261,8 +261,10 @@ section h2:after {
 #google-oauth-button {
   width: 100px;
   height: 40px;
-  background-color: red;
-  color: white;
+  background-color: white;
+  color: #3412f3;
+  border-color: #3412f3;
+  width: 200px;
   font-size: 10pt;
   border-radius: 10px;
 }
@@ -281,7 +283,7 @@ section h2:after {
 }
 
 #demo-title {
-  padding-top: 250px;
+  padding-top: 170px;
   text-align: center;
 }
 
@@ -468,4 +470,22 @@ section h2:after {
 
 #no-past-recordings {
   text-align: center;
+}
+
+#demo-container {
+  text-align: center;
+}
+#steps h5 {
+  margin: 50px;
+  font-size: 15pt;
+  text-align: center;
+}
+
+#get-started-btn {
+  background-color: #3412f3;
+  color: white;
+  width: 250px;
+  height: 100px;
+  font-size: 18pt;
+  border-radius: 10px;
 }

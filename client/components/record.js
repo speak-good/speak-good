@@ -327,7 +327,17 @@ export class Record extends React.Component {
         <br />
         <br />
         <br />
-        <h2>Ready, Set, Action!</h2>
+        <h2 id="ready-set-action">Ready, Set, Action!</h2>
+        <div id="red-button-container">
+          {this.state.started ? (
+            <img
+              id="record-button-action"
+              src="https://icon-library.net/images/record-button-icon/record-button-icon-16.jpg"
+            />
+          ) : (
+            ''
+          )}
+        </div>
         <div id="recording-container">
           <div>
             <video id="vidRef" ref="vidRef" controls autoPlay />
@@ -344,23 +354,25 @@ export class Record extends React.Component {
                 <br />
               </div>
             ) : (
-              <div id="flex">
-                <button
-                  disabled={this.state.started}
-                  className="vid-button"
-                  onClick={startRecording}
-                >
-                  Start Recording
-                </button>
-                <button
-                  disabled={!this.state.started}
-                  id="stop"
-                  className="vid-button"
-                  ref="stop"
-                  onClick={realStopRecording}
-                >
-                  Stop Recording
-                </button>
+              <div>
+                <div id="flex">
+                  <button
+                    disabled={this.state.started}
+                    className="vid-button"
+                    onClick={startRecording}
+                  >
+                    Start Recording
+                  </button>
+                  <button
+                    disabled={!this.state.started}
+                    id="stop"
+                    className="vid-button"
+                    ref="stop"
+                    onClick={realStopRecording}
+                  >
+                    Stop Recording
+                  </button>
+                </div>
               </div>
             )}
             {this.state.linkOut ? (
@@ -375,7 +387,7 @@ export class Record extends React.Component {
                     Reset Recording
                   </button>
                   <button
-                    id="middle"
+                    id="middle-opposite"
                     className="vid-button"
                     ref="save"
                     onClick={() => saveRecording()}

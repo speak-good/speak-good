@@ -25,10 +25,26 @@ const fillerWords = {
   Ok: true,
   Okay: true,
   okay: true,
+  just: true,
+  Just: true,
+  Maybe: true,
+  maybe: true,
   So: true,
   so: true,
   Well: true,
   well: true,
+  seriously: true,
+  Seriously: true,
+  Probably: true,
+  probably: true,
+  Anyways: true,
+  anyways: true,
+  sorry: true,
+  Sorry: true,
+  Cuz: true,
+  cuz: true,
+  But: true,
+  but: true,
   Totally: true,
   totally: true,
   Basically: true,
@@ -48,16 +64,27 @@ const fillerWords = {
 const fillerPhrases = {
   'I mean': true,
   'I guess': true,
+  'I suppose': true,
   'You know': true,
   'you know': true,
   'You see': true,
   'you see': true,
+  'And also': true,
+  'and also': true,
   'Or something': true,
   'or something': true,
   'Kind of': true,
   'kind of': true,
   'Sort of': true,
   'sort of': true
+}
+
+const longFillerPhrases = {
+  'I don’t know': true,
+  'Stuff like that': true,
+  'stuff like that': true,
+  'I think that': true,
+  'I feel like': true
 }
 
 let recorder
@@ -209,6 +236,19 @@ export class Record extends React.Component {
           fillerWordsUsed.push(currPhrase)
         }
       }
+      for (let i = 0; i < transcriptArr.length; i++) {
+        let currPhrase =
+          transcriptArr[i] +
+          ' ' +
+          transcriptArr[i + 1] +
+          ' ' +
+          transcriptArr[i + 2]
+        console.log(currPhrase)
+        if (longFillerPhrases[currPhrase]) {
+          count++
+          fillerWordsUsed.push(currPhrase)
+        }
+      }
 
       console.log('NOT FILTERED TRANSCRIPT: ', this.props.transcript)
       console.log('FILLER WORD COUNT: ', count)
@@ -287,7 +327,17 @@ export class Record extends React.Component {
         <br />
         <br />
         <br />
-        <h2>Ready, Set, Action!</h2>
+        <h2 id="ready-set-action">Ready, Set, Action!</h2>
+        <div id="red-button-container">
+          {this.state.started ? (
+            <img
+              id="record-button-action"
+              src="https://icon-library.net/images/record-button-icon/record-button-icon-16.jpg"
+            />
+          ) : (
+            ''
+          )}
+        </div>
         <div id="recording-container">
           <div>
             <video id="vidRef" ref="vidRef" controls autoPlay />
@@ -304,23 +354,25 @@ export class Record extends React.Component {
                 <br />
               </div>
             ) : (
-              <div id="flex">
-                <button
-                  disabled={this.state.started}
-                  className="vid-button"
-                  onClick={startRecording}
-                >
-                  Start Recording
-                </button>
-                <button
-                  disabled={!this.state.started}
-                  id="stop"
-                  className="vid-button"
-                  ref="stop"
-                  onClick={realStopRecording}
-                >
-                  Stop Recording
-                </button>
+              <div>
+                <div id="flex">
+                  <button
+                    disabled={this.state.started}
+                    className="vid-button"
+                    onClick={startRecording}
+                  >
+                    Start Recording
+                  </button>
+                  <button
+                    disabled={!this.state.started}
+                    id="stop"
+                    className="vid-button"
+                    ref="stop"
+                    onClick={realStopRecording}
+                  >
+                    Stop Recording
+                  </button>
+                </div>
               </div>
             )}
             {this.state.linkOut ? (
@@ -335,7 +387,7 @@ export class Record extends React.Component {
                     Reset Recording
                   </button>
                   <button
-                    id="middle"
+                    id="middle-opposite"
                     className="vid-button"
                     ref="save"
                     onClick={() => saveRecording()}

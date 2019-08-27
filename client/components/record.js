@@ -344,7 +344,7 @@ export class Record extends React.Component {
                   </button>
                 </div>
 
-                {this.state.save ? (
+                {this.state.save && allRecording.length ? (
                   <div>
                     <Link
                       to={`/recordings/${

@@ -61,13 +61,126 @@ class UserProfile extends Component {
       '12': 'December'
     }
 
+    let hour = {
+      '00': {
+        time: 8,
+        day: 'pm'
+      },
+      '01': {
+        time: 9,
+        day: 'pm'
+      },
+      '02': {
+        time: 10,
+        day: 'pm'
+      },
+      '03': {
+        time: 11,
+        day: 'pm'
+      },
+      '04': {
+        time: 12,
+        day: 'am'
+      },
+      '05': {
+        time: 1,
+        day: 'am'
+      },
+      '06': {
+        time: 2,
+        day: 'am'
+      },
+      '07': {
+        time: 3,
+        day: 'am'
+      },
+      '08': {
+        time: 4,
+        day: 'am'
+      },
+      '09': {
+        time: 5,
+        day: 'am'
+      },
+      '10': {
+        time: 6,
+        day: 'am'
+      },
+      '11': {
+        time: 7,
+        day: 'am'
+      },
+      '12': {
+        time: 8,
+        day: 'am'
+      },
+      '13': {
+        time: 9,
+        day: 'am'
+      },
+      '14': {
+        time: 10,
+        day: 'am'
+      },
+      '15': {
+        time: 11,
+        day: 'am'
+      },
+      '16': {
+        time: 12,
+        day: 'pm'
+      },
+      '17': {
+        time: 1,
+        day: 'pm'
+      },
+      '18': {
+        time: 2,
+        day: 'pm'
+      },
+      '19': {
+        time: 3,
+        day: 'pm'
+      },
+      '20': {
+        time: 4,
+        day: 'pm'
+      },
+      '21': {
+        time: 5,
+        day: 'pm'
+      },
+      '22': {
+        time: 6,
+        day: 'pm'
+      },
+      '23': {
+        time: 7,
+        day: 'pm'
+      }
+    }
+
     let formattedDate = unformattedDate => {
       let year = unformattedDate.slice(0, 4)
       let month = unformattedDate.slice(5, 7)
       let day = unformattedDate.slice(8, 10)
       return months[month] + ' ' + day + ', ' + year
     }
+    let formattedTime = unformattedTime => {
+      let newTime = unformattedTime.slice(11)
+      let newhour = newTime.slice(0, 2)
+      let newmin = newTime.slice(3, 5)
+      return hour[newhour].time + ':' + newmin + ' ' + hour[newhour].day
+    }
+
     const {allRecording} = this.props.recordings
+    let filteredRecordings = recordings => {
+      let newOrder = []
+      for (let i = recordings.length - 1; i >= 0; i--) {
+        newOrder.push(recordings[i])
+      }
+      return newOrder
+    }
     return (
       <div id="top-margin">
         <h2 id="past-recordings-header">
@@ -103,7 +216,7 @@ class UserProfile extends Component {
           <div id="no-past-recordings">None</div>
         ) : (
           <div id="map-container">
-            {allRecording.map(recording => (
+            {filteredRecordings(allRecording).map(recording => (
               <div key={recording.id}>
                 <div>
                   <div className="card-body">
@@ -112,17 +225,22 @@ class UserProfile extends Component {
                       type="button"
                       onClick={() => this.handleClick(recording)}
                     >
-                      X
+                      ✕
                     </button>
                     <Link to={`/recordings/${recording.id}`}>
                       <button type="button" className="past-recordings">
                         {/* <div id="button-container"> */}
                         {/* <div> */}
                         <div id="grade">
-                          <p>{recording.grade}</p>
+                          <h6 id="grade-text">Grade:</h6>
+
+                          <p id="big-grade-text">{recording.grade}</p>
                         </div>
                         <div id="details">
-                          <p>Date: {formattedDate(recording.createdAt)}</p>
+                          <p>
+                            {formattedDate(recording.createdAt)} at{' '}
+                            {formattedTime(recording.createdAt)}
+                          </p>
                           <p>
                             Preview:{' '}
                             {this.previewTranscript(recording.transcript)}

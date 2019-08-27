@@ -16,12 +16,6 @@ export default function(props) {
               className="resultImage"
               src="https://media.giphy.com/media/1g3BfhRZ0D08yZvUqV/giphy.gif"
             />
-            <div className="progress-bar striped animated">
-              <span
-                className="progress-bar-green"
-                style={{width: `${percentage}%`}}
-              />
-            </div>
             <h4>Congratulations</h4>
           </div>
         ) : 40 < percentage && percentage < 69 ? (
@@ -30,12 +24,6 @@ export default function(props) {
               className="resultImage"
               src="https://media.giphy.com/media/3o7TKsoVuOCiiw7Zx6/giphy.gif"
             />
-            <div className="progress-bar striped animated">
-              <span
-                className="progress-bar-blue"
-                style={{width: `${percentage}%`}}
-              />
-            </div>
             <h4>Keep Practicing!</h4>
           </div>
         ) : (
@@ -44,12 +32,6 @@ export default function(props) {
               className="resultImage"
               src="https://media.giphy.com/media/C1Fdach2R4HSg/giphy.gif"
             />
-            <div className="progress-bar striped animated">
-              <span
-                className="progress-bar-red"
-                style={{width: `${percentage}%`}}
-              />
-            </div>
             <h4>Try Again</h4>
           </div>
         )}

@@ -7,18 +7,22 @@ const Content = () => {
       <section id="carousel">
         <div id="top-text">
           <h1>Practice makes perfect</h1>
-          <h2>Learn More</h2>
+          <a href="#about">
+            <h2>Learn More</h2>
+          </a>
         </div>
-        <img className="top-image" src="images/banner-woman.png" />
+        <img className="top-image" src="https://i.imgur.com/YH6KQT3.png" />
       </section>
       <section id="about">
         <h2>About</h2>
         <div className="flex">
           <p>
             Speaking effectively is an invaluable skill that we all want to
-            improve upon.<br />We believe that practice makes perfect! <br />SpeakGood
+            improve upon. We believe that practice makes perfect! <br />SpeakGood
             is a platform for those who want to record and improve their public
-            speaking and interview skills.
+            speaking and interview skills.<br />
+            <br />
+            Scroll down to learn more ⬇️
           </p>
           <div id="aboutimg">
             <img src="images/interview.png" alt="interview" />
@@ -28,7 +32,7 @@ const Content = () => {
       <section id="power">
         <h2>Unleash Your Power</h2>
         <div className="flex">
-          <div id="aboutimg">
+          <div id="powerimg">
             <img src="images/powerpose.png" alt="interview" />
           </div>
           <p>
@@ -44,6 +48,20 @@ const Content = () => {
           </p>
         </div>
       </section>
+      <section id="about">
+        <h2>About</h2>
+        <div className="flex">
+          <p>
+            Studies show that power poses can instantaneously give you a boost
+            in confidence and mood.
+          </p>
+          <img
+            id="speechimage"
+            src="https://i.imgur.com/pKOk0uX.png"
+            alt="interview"
+          />
+        </div>
+      </section>
       <section id="features">
         <h2>Features</h2>
         <div className="wrap">
@@ -55,29 +73,29 @@ const Content = () => {
             <p className="feature-blurb">
               An even-paced, steady speech helps retain your audience as well as
               help you sound more confident. Record your speech so you can
-              practice being the best version of your self!
+              practice being the best version of your self.
             </p>
           </div>
           <div className="feature-profile">
             <div className="icon">
-              <img src="images/posture.png" alt="interview" />
-            </div>
-            <h3 className="feature-name">Capture Body Language</h3>
-            <p className="feature-blurb">
-              An upright, confident posture speaks a million words - use our
-              Slouch-o-meter to keep track of your body language.
-            </p>
-          </div>
-          <div className="feature-profile">
-            <div className="icon">
-              <img src="images/analysis.png" alt="interview" />
+              <img src="https://i.imgur.com/gi3jhai.png" alt="interview" />
             </div>
             <h3 className="feature-name">Analyze Speech</h3>
             <p className="feature-blurb">
               {' '}
               We're all guilty of using "like", "so", and other conversational
-              filler words. We will keep track of all your speech hesitations so
-              you can improve over time!
+              filler words. After your recording, we'll provide you a grade
+              indicating how well you've performed!
+            </p>
+          </div>
+          <div className="feature-profile">
+            <div className="icon">
+              <img src="https://i.imgur.com/p6iCWMl.png" alt="interview" />
+            </div>
+            <h3 className="feature-name">Boost Your Confidence</h3>
+            <p className="feature-blurb">
+              An upright, confident posture speaks a million words - use our
+              Power Pose guide to get an instant mood boost!
             </p>
           </div>
 

@@ -48,6 +48,21 @@ const Content = () => {
           </p>
         </div>
       </section>
+      <section id="about">
+        <h2>Track Filler Words</h2>
+        <div className="flex">
+          <p>
+            Get a transcription of your pitch, word-for-word. Index and
+            reference interview sections quickly, and make improvements to your
+            speech in no time! Use our state of the art algorithms to help you
+            keep track of your most frequestly used filler words and improve
+            your performance as a public speaker!
+          </p>
+          <div id="aboutimg">
+            <img src="images/interview.png" alt="interview" />
+          </div>
+        </div>
+      </section>
       <section id="features">
         <h2>Features</h2>
         <div className="wrap">
@@ -90,8 +105,8 @@ const Content = () => {
             </div>
             <h3 className="feature-name">Body Language Analysis</h3>
             <p className="feature-blurb">
-              Using our state of the art Slouch-o-meter, our algorithms
-              calculate how far you are from a confident posture.
+              Coming soon! Using our state of the art Slouch-o-meter, our
+              algorithms calculate how far you are from a confident posture.
             </p>
           </div>
           <div className="feature-profile">

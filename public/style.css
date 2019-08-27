@@ -297,11 +297,6 @@ section h2:after {
   width: 650px;
   height: 450px;
   margin-right: 25px;
-  border-style: dotted;
-  border-color: yellow;
-  border-width: 18px;
-  padding: 15px;
-  /* padding-bottom: 10px; */
 }
 
 #record-page,

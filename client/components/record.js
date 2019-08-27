@@ -25,10 +25,26 @@ const fillerWords = {
   Ok: true,
   Okay: true,
   okay: true,
+  just: true,
+  Just: true,
+  Maybe: true,
+  maybe: true,
   So: true,
   so: true,
   Well: true,
   well: true,
+  seriously: true,
+  Seriously: true,
+  Probably: true,
+  probably: true,
+  Anyways: true,
+  anyways: true,
+  sorry: true,
+  Sorry: true,
+  Cuz: true,
+  cuz: true,
+  But: true,
+  but: true,
   Totally: true,
   totally: true,
   Basically: true,
@@ -48,16 +64,27 @@ const fillerWords = {
 const fillerPhrases = {
   'I mean': true,
   'I guess': true,
+  'I suppose': true,
   'You know': true,
   'you know': true,
   'You see': true,
   'you see': true,
+  'And also': true,
+  'and also': true,
   'Or something': true,
   'or something': true,
   'Kind of': true,
   'kind of': true,
   'Sort of': true,
   'sort of': true
+}
+
+const longFillerPhrases = {
+  'I don’t know': true,
+  'Stuff like that': true,
+  'stuff like that': true,
+  'I think that': true,
+  'I feel like': true
 }
 
 let recorder
@@ -205,6 +232,19 @@ export class Record extends React.Component {
       for (let i = 0; i < transcriptArr.length; i++) {
         let currPhrase = transcriptArr[i] + ' ' + transcriptArr[i + 1]
         if (fillerPhrases[currPhrase]) {
+          count++
+          fillerWordsUsed.push(currPhrase)
+        }
+      }
+      for (let i = 0; i < transcriptArr.length; i++) {
+        let currPhrase =
+          transcriptArr[i] +
+          ' ' +
+          transcriptArr[i + 1] +
+          ' ' +
+          transcriptArr[i + 2]
+        console.log(currPhrase)
+        if (longFillerPhrases[currPhrase]) {
           count++
           fillerWordsUsed.push(currPhrase)
         }

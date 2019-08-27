@@ -395,14 +395,13 @@ section h2:after {
   height: 120px;
   border-radius: 15px;
 }
-#grade p {
-  font-size: 40pt;
-  margin: 5px 60px 5px 25px;
-}
+
 #details {
   display: flex;
   flex-direction: column;
   text-align: left;
+  margin-top: 10px;
+  font-size: 12pt;
 }
 #details p {
   margin-top: 8px;
@@ -412,7 +411,7 @@ section h2:after {
   color: red;
   background-color: white;
   border-color: white;
-  font-size: 30pt;
+  font-size: 25pt;
   margin-right: 10px;
   display: inline;
 }
@@ -428,6 +427,7 @@ section h2:after {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* padding-left: 30px; */
 }
 
 #top-margin {
@@ -488,4 +488,25 @@ section h2:after {
   height: 100px;
   font-size: 18pt;
   border-radius: 10px;
+}
+
+#grade {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#grade-text {
+  font-size: 12pt;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: left;
+  margin-left: 25px;
+}
+#big-grade-text p {
+  /* text-align: center; */
+}
+#grade p {
+  font-size: 40pt;
+  margin: 0 60px 5px 30px;
 }

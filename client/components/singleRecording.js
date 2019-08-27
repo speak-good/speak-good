@@ -187,7 +187,8 @@ export class SingleRecording extends React.Component {
                 <span className="bold">Filler Word Count:</span> {fillerCount}
               </p>
               <p>
-                <span className="bold">Transcript:</span>{' '}
+                <span className="bold">Transcript:</span>
+                <span> " </span>
                 {transcript.length === 0
                   ? ' None'
                   : transcript
@@ -200,6 +201,7 @@ export class SingleRecording extends React.Component {
                             <span>{`${word} `}</span>
                           )
                       )}
+                <span>."</span>
               </p>
               <p>
                 <span className="bold">Filler Words Used:</span>

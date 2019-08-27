@@ -72,7 +72,8 @@ export class Record extends React.Component {
       fillerCount: 0,
       grade: '',
       linkOut: false,
-      save: false
+      save: false,
+      started: false
     }
     this.putVideoInFirebase = this.putVideoInFirebase.bind(this)
     this.initializeFirebase = this.initializeFirebase.bind(this)
@@ -124,7 +125,8 @@ export class Record extends React.Component {
     const startRecording = () => {
       this.setState({
         linkOut: false,
-        save: false
+        save: false,
+        started: true
       })
       this.props.resetTranscript()
       this.props.startListening()
@@ -185,6 +187,9 @@ export class Record extends React.Component {
 
     const realStopRecording = () => {
       let that = this
+      this.setState({
+        started: false
+      })
       this.props.abortListening()
       this.props.stopListening()
       let count = 0
@@ -288,20 +293,36 @@ export class Record extends React.Component {
             <video id="vidRef" ref="vidRef" controls autoPlay />
           </div>
           <div id="button-container">
-            <div id="flex">
-              <button className="vid-button" onClick={startRecording}>
-                Start Recording
-              </button>
-              <button
-                id="stop"
-                className="vid-button"
-                ref="stop"
-                onClick={realStopRecording}
-              >
-                Stop Recording
-              </button>
-            </div>
-
+            {this.state.videoBlob ? (
+              <div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+              </div>
+            ) : (
+              <div id="flex">
+                <button
+                  disabled={this.state.started}
+                  className="vid-button"
+                  onClick={startRecording}
+                >
+                  Start Recording
+                </button>
+                <button
+                  disabled={!this.state.started}
+                  id="stop"
+                  className="vid-button"
+                  ref="stop"
+                  onClick={realStopRecording}
+                >
+                  Stop Recording
+                </button>
+              </div>
+            )}
             {this.state.linkOut ? (
               <div>
                 <div id="center">

@@ -4,7 +4,7 @@ import SpeechRecognition from 'react-speech-recognition'
 import {Link} from 'react-router-dom'
 import firebase from 'firebase'
 import firebaseConfig from '../../secrets'
-import {addNewRecording} from '../store/recordings'
+import {addNewRecording, fetchRecordings} from '../store/recordings'
 import {me} from '../store/user'
 import {connect} from 'react-redux'
 
@@ -25,10 +25,26 @@ const fillerWords = {
   Ok: true,
   Okay: true,
   okay: true,
+  just: true,
+  Just: true,
+  Maybe: true,
+  maybe: true,
   So: true,
   so: true,
   Well: true,
   well: true,
+  seriously: true,
+  Seriously: true,
+  Probably: true,
+  probably: true,
+  Anyways: true,
+  anyways: true,
+  sorry: true,
+  Sorry: true,
+  Cuz: true,
+  cuz: true,
+  But: true,
+  but: true,
   Totally: true,
   totally: true,
   Basically: true,
@@ -48,16 +64,27 @@ const fillerWords = {
 const fillerPhrases = {
   'I mean': true,
   'I guess': true,
+  'I suppose': true,
   'You know': true,
   'you know': true,
   'You see': true,
   'you see': true,
+  'And also': true,
+  'and also': true,
   'Or something': true,
   'or something': true,
   'Kind of': true,
   'kind of': true,
   'Sort of': true,
   'sort of': true
+}
+
+const longFillerPhrases = {
+  'I don’t know': true,
+  'Stuff like that': true,
+  'stuff like that': true,
+  'I think that': true,
+  'I feel like': true
 }
 
 let recorder
@@ -72,7 +99,8 @@ export class Record extends React.Component {
       fillerCount: 0,
       grade: '',
       linkOut: false,
-      save: false
+      save: false,
+      started: false
     }
     this.putVideoInFirebase = this.putVideoInFirebase.bind(this)
     this.initializeFirebase = this.initializeFirebase.bind(this)
@@ -86,6 +114,7 @@ export class Record extends React.Component {
 
   componentDidMount() {
     this.initializeFirebase()
+    this.props.fetchRecordings()
   }
 
   putVideoInFirebase = video => {
@@ -123,7 +152,8 @@ export class Record extends React.Component {
     const startRecording = () => {
       this.setState({
         linkOut: false,
-        save: false
+        save: false,
+        started: true
       })
       this.props.resetTranscript()
       this.props.startListening()
@@ -184,6 +214,9 @@ export class Record extends React.Component {
 
     const realStopRecording = () => {
       let that = this
+      this.setState({
+        started: false
+      })
       this.props.abortListening()
       this.props.stopListening()
       let count = 0
@@ -199,6 +232,19 @@ export class Record extends React.Component {
       for (let i = 0; i < transcriptArr.length; i++) {
         let currPhrase = transcriptArr[i] + ' ' + transcriptArr[i + 1]
         if (fillerPhrases[currPhrase]) {
+          count++
+          fillerWordsUsed.push(currPhrase)
+        }
+      }
+      for (let i = 0; i < transcriptArr.length; i++) {
+        let currPhrase =
+          transcriptArr[i] +
+          ' ' +
+          transcriptArr[i + 1] +
+          ' ' +
+          transcriptArr[i + 2]
+        console.log(currPhrase)
+        if (longFillerPhrases[currPhrase]) {
           count++
           fillerWordsUsed.push(currPhrase)
         }
@@ -274,33 +320,61 @@ export class Record extends React.Component {
       this.setState({save: true})
       this.putVideoInFirebase(this.state.videoBlob)
     }
-
+    const allRecording = this.props.allRecording
     return (
       <div id="record-page">
         <br />
         <br />
         <br />
         <br />
-        <h2>Ready, Set, Action!</h2>
+        <h2 id="ready-set-action">Ready, Set, Action!</h2>
+        <div id="red-button-container">
+          {this.state.started ? (
+            <img
+              id="record-button-action"
+              src="https://icon-library.net/images/record-button-icon/record-button-icon-16.jpg"
+            />
+          ) : (
+            ''
+          )}
+        </div>
         <div id="recording-container">
           <div>
             <video id="vidRef" ref="vidRef" controls autoPlay />
           </div>
           <div id="button-container">
-            <div id="flex">
-              <button className="vid-button" onClick={startRecording}>
-                Start Recording
-              </button>
-              <button
-                id="stop"
-                className="vid-button"
-                ref="stop"
-                onClick={realStopRecording}
-              >
-                Stop Recording
-              </button>
-            </div>
-
+            {this.state.videoBlob ? (
+              <div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+              </div>
+            ) : (
+              <div>
+                <div id="flex">
+                  <button
+                    disabled={this.state.started}
+                    className="vid-button"
+                    onClick={startRecording}
+                  >
+                    Start Recording
+                  </button>
+                  <button
+                    disabled={!this.state.started}
+                    id="stop"
+                    className="vid-button"
+                    ref="stop"
+                    onClick={realStopRecording}
+                  >
+                    Stop Recording
+                  </button>
+                </div>
+              </div>
+            )}
             {this.state.linkOut ? (
               <div>
                 <div id="center">
@@ -313,7 +387,7 @@ export class Record extends React.Component {
                     Reset Recording
                   </button>
                   <button
-                    id="middle"
+                    id="middle-opposite"
                     className="vid-button"
                     ref="save"
                     onClick={() => saveRecording()}
@@ -322,9 +396,13 @@ export class Record extends React.Component {
                   </button>
                 </div>
 
-                {this.state.save ? (
+                {this.state.save && allRecording.length ? (
                   <div>
-                    <Link to="/profile">
+                    <Link
+                      to={`/recordings/${
+                        allRecording[allRecording.length - 1].id
+                      }`}
+                    >
                       <button id="results" className="vid-button">
                         View Your Results
                       </button>
@@ -346,7 +424,8 @@ export class Record extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    defaultUser: state.user
+    defaultUser: state.user,
+    allRecording: state.recordings.allRecording
   }
 }
 
@@ -357,6 +436,9 @@ function mapDispatchToProps(dispatch) {
     },
     addNewRecording: function(recording) {
       dispatch(addNewRecording(recording))
+    },
+    fetchRecordings: function() {
+      dispatch(fetchRecordings())
     }
   }
 }

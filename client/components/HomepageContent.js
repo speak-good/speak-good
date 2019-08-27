@@ -48,20 +48,6 @@ const Content = () => {
           </p>
         </div>
       </section>
-      <section id="about">
-        <h2>About</h2>
-        <div className="flex">
-          <p>
-            Studies show that power poses can instantaneously give you a boost
-            in confidence and mood.
-          </p>
-          <img
-            id="speechimage"
-            src="https://i.imgur.com/pKOk0uX.png"
-            alt="interview"
-          />
-        </div>
-      </section>
       <section id="features">
         <h2>Features</h2>
         <div className="wrap">
@@ -98,7 +84,6 @@ const Content = () => {
               Power Pose guide to get an instant mood boost!
             </p>
           </div>
-
           <div className="feature-profile">
             <div className="icon">
               <img src="images/analysis.png" alt="interview" />

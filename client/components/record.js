@@ -4,7 +4,7 @@ import SpeechRecognition from 'react-speech-recognition'
 import {Link} from 'react-router-dom'
 import firebase from 'firebase'
 import firebaseConfig from '../../secrets'
-import {addNewRecording} from '../store/recordings'
+import {addNewRecording, fetchRecordings} from '../store/recordings'
 import {me} from '../store/user'
 import {connect} from 'react-redux'
 
@@ -86,6 +86,7 @@ export class Record extends React.Component {
 
   componentDidMount() {
     this.initializeFirebase()
+    this.props.fetchRecordings()
   }
 
   putVideoInFirebase = video => {
@@ -274,7 +275,7 @@ export class Record extends React.Component {
       this.setState({save: true})
       this.putVideoInFirebase(this.state.videoBlob)
     }
-
+    const allRecording = this.props.allRecording
     return (
       <div id="record-page">
         <br />
@@ -324,7 +325,11 @@ export class Record extends React.Component {
 
                 {this.state.save ? (
                   <div>
-                    <Link to="/profile">
+                    <Link
+                      to={`/recordings/${
+                        allRecording[allRecording.length - 1].id
+                      }`}
+                    >
                       <button id="results" className="vid-button">
                         View Your Results
                       </button>
@@ -346,7 +351,8 @@ export class Record extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    defaultUser: state.user
+    defaultUser: state.user,
+    allRecording: state.recordings.allRecording
   }
 }
 
@@ -357,6 +363,9 @@ function mapDispatchToProps(dispatch) {
     },
     addNewRecording: function(recording) {
       dispatch(addNewRecording(recording))
+    },
+    fetchRecordings: function() {
+      dispatch(fetchRecordings())
     }
   }
 }

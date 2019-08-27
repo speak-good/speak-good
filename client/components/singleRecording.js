@@ -4,6 +4,67 @@ import firebase from 'firebase'
 import {fetchSingleRecording} from '../store/recordings'
 import {connect} from 'react-redux'
 
+const fillerWords = {
+  like: true,
+  Like: true,
+  ok: true,
+  OK: true,
+  Ok: true,
+  Okay: true,
+  okay: true,
+  So: true,
+  so: true,
+  Well: true,
+  well: true,
+  Totally: true,
+  totally: true,
+  Basically: true,
+  basically: true,
+  Literally: true,
+  literally: true,
+  Actually: true,
+  actually: true,
+  Really: true,
+  really: true,
+  Stuff: true,
+  stuff: true,
+  Whatever: true,
+  whatever: true,
+  Just: true,
+  just: true,
+  Maybe: true,
+  maybe: true,
+  Seriously: true,
+  seriously: true,
+  Probably: true,
+  probably: true,
+  Anyways: true,
+  anyways: true,
+  Sorry: true,
+  sorry: true,
+  Look: true,
+  look: true,
+  Cuz: true,
+  cuz: true,
+  But: true,
+  but: true
+}
+
+const fillerPhrases = {
+  'I mean': true,
+  'I guess': true,
+  'You know': true,
+  'you know': true,
+  'You see': true,
+  'you see': true,
+  'Or something': true,
+  'or something': true,
+  'Kind of': true,
+  'kind of': true,
+  'Sort of': true,
+  'sort of': true
+}
+
 export class SingleRecording extends React.Component {
   constructor() {
     super()
@@ -54,49 +115,6 @@ export class SingleRecording extends React.Component {
     } = this.props.singleRecording
     if (!this.props.singleRecording.video) {
       return <div>Loading...</div>
-    }
-
-    const fillerWords = {
-      like: true,
-      Like: true,
-      ok: true,
-      OK: true,
-      Ok: true,
-      Okay: true,
-      okay: true,
-      So: true,
-      so: true,
-      Well: true,
-      well: true,
-      Totally: true,
-      totally: true,
-      Basically: true,
-      basically: true,
-      Literally: true,
-      literally: true,
-      Actually: true,
-      actually: true,
-      Really: true,
-      really: true,
-      Stuff: true,
-      stuff: true,
-      Whatever: true,
-      whatever: true
-    }
-
-    const fillerPhrases = {
-      'I mean': true,
-      'I guess': true,
-      'You know': true,
-      'you know': true,
-      'You see': true,
-      'you see': true,
-      'Or something': true,
-      'or something': true,
-      'Kind of': true,
-      'kind of': true,
-      'Sort of': true,
-      'sort of': true
     }
 
     let months = {
@@ -170,7 +188,18 @@ export class SingleRecording extends React.Component {
               </p>
               <p>
                 <span className="bold">Transcript:</span>{' '}
-                {transcript.length === 0 ? ' None' : '"' + transcript + '"'}
+                {transcript.length === 0
+                  ? ' None'
+                  : transcript
+                      .split(' ')
+                      .map(
+                        word =>
+                          fillerWords[word] ? (
+                            <span className="highlight">{`${word} `}</span>
+                          ) : (
+                            <span>{`${word} `}</span>
+                          )
+                      )}
               </p>
               <p>
                 <span className="bold">Filler Words Used:</span>

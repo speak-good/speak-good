@@ -25,6 +25,10 @@ label {
   display: inline-block;
   margin: 1em;
 } */
+.highlight {
+  background-color: yellow;
+  color: black;
+}
 
 form div {
   margin: 1em;

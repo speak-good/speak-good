@@ -63,6 +63,7 @@
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.1",
     "react-router-dom": "^5.0.0",
+    "react-scroll-up-button": "^1.6.4",
     "react-speech-recognition": "^2.0.4",
     "recordrtc": "^5.5.8",
     "recordrtc-nodejs": "^1.0.6",

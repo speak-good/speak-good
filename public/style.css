@@ -239,9 +239,13 @@ section h2:after {
   line-height: 1.75em;
 }
 
+.icon {
+  text-align: center;
+}
+
 .icon img {
   width: 5em;
-  margin-left: 13em;
+  /* margin-left: 13em; */
   margin-top: 2em;
   margin-bottom: 2em;
 }

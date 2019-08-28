@@ -11,58 +11,70 @@ const AuthForm = props => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div id="auth-form">
+      <div id="auth-form">
+        <form id="small-auth-form" onSubmit={handleSubmit} name={name}>
           <div>
             {displayName === 'Sign Up' ? (
-              <div>
+              <div id="signup-no-margin">
                 <div>
                   <label htmlFor="firstName">
-                    <small>First Name</small>
+                    <h5 className="auth-form-text">First Name</h5>
                   </label>
-                  <input name="firstName" type="text" />
+                  <input
+                    className="input-stretch"
+                    name="firstName"
+                    type="text"
+                  />
                 </div>
                 <div>
                   <label htmlFor="lastName">
-                    <small>Last Name</small>
+                    <h5 className="auth-form-text">Last Name</h5>
                   </label>
-                  <input name="lastName" type="text" />
+                  <input
+                    className="input-stretch"
+                    name="lastName"
+                    type="text"
+                  />
                 </div>
               </div>
             ) : (
               ''
             )}
-            <div>
-              <label htmlFor="email">
-                <small>Email</small>
-              </label>
-              <input name="email" type="text" />
+            <div id="email-flex">
+              <div>
+                <label htmlFor="email">
+                  <h5 className="auth-form-text">Email</h5>
+                </label>
+                <input className="input-stretch" name="email" type="text" />
+              </div>
+              <div>
+                <label htmlFor="password">
+                  <h5 className="auth-form-text">Password</h5>
+                </label>
+                <input
+                  className="input-stretch"
+                  name="password"
+                  type="password"
+                />
+              </div>
+
+              <div id="auth-button-center">
+                <button id="auth-button" type="submit">
+                  {displayName}
+                </button>
+              </div>
+              {error && error.response && <div> {error.response.data} </div>}
             </div>
-            <div>
-              <label htmlFor="password">
-                <small>Password</small>
-              </label>
-              <input name="password" type="password" />
-            </div>
+            <form method="get" action="/auth/google">
+              <div className="google-oauth">
+                <button type="submit" id="google-oauth-button">
+                  {displayName} with Google
+                </button>
+              </div>
+            </form>
           </div>
-          <div>
-            <button id="auth-button" type="submit">
-              {displayName}
-            </button>
-          </div>
-          {error && error.response && <div> {error.response.data} </div>}
-        </div>
-      </form>
-      <form method="get" action="/auth/google">
-        <div className="google-oauth">
-          <button type="submit" id="google-oauth-button">
-            {displayName} with Google
-          </button>
-        </div>
-      </form>
-      {/* <div id="google-auth-link">
-        <a href="/auth/google">{displayName} with Google</a>
-      </div> */}
+        </form>
+      </div>
     </div>
   )
 }

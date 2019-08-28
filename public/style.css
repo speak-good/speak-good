@@ -70,7 +70,7 @@ header nav {
 
 .nav-item {
   height: 1.5em;
-  margin: 0 1.5em 0 0;
+  margin: 1.25em 1.5em 0 0;
 }
 
 .nav-item a {
@@ -241,7 +241,9 @@ section h2:after {
 
 .icon img {
   width: 5em;
-  margin-left: 12em;
+  margin-left: 13em;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 /* .footer {
@@ -252,29 +254,29 @@ section h2:after {
 } */
 
 #auth-form {
-  padding-top: 250px;
+  padding-top: 150px;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
 #auth-button {
-  width: 200px;
-  height: 40px;
+  width: 250px;
+  height: 45px;
   background-color: #3412f3;
   color: white;
   font-size: 15pt;
   border-radius: 10px;
+  text-align: center;
 }
 
 #google-oauth-button {
-  width: 100px;
-  height: 40px;
+  width: 250px;
+  height: 45px;
   background-color: white;
   color: #3412f3;
   border-color: #3412f3;
-  width: 200px;
-  font-size: 10pt;
+  font-size: 15pt;
   border-radius: 10px;
 }
 
@@ -285,7 +287,7 @@ section h2:after {
 
 #nav-trio,
 #navbar {
-  margin-top: 8px;
+  margin-top: 0px;
   display: flex;
   align-content: center;
   justify-items: center;
@@ -294,6 +296,7 @@ section h2:after {
 #demo-title {
   padding-top: 170px;
   text-align: center;
+  margin-top: 0;
 }
 
 .profile-body {
@@ -319,7 +322,6 @@ section h2:after {
 #countdownDiv,
 #past-recordings-header {
   text-align: center;
-  margin-top: 70px;
 }
 
 .powerCamDiv {
@@ -578,7 +580,41 @@ section h2:after {
   background-color: white;
   border-color: #3412f3;
 }
+#small-auth-form {
+  padding: 50px;
+  width: 550px;
+  height: 555px;
+  text-align: center;
+}
+#email-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  margin: 0 0 8px 0;
+}
 
+#signup-no-margin {
+  margin: 0;
+}
+
+#auth-button-center {
+  text-align: center;
+  margin: 10px 0 0 0;
+}
+
+.auth-form-text {
+  font-size: 15pt;
+  margin: 0 0 5px 0;
+  text-align: center;
+}
+
+.input-stretch {
+  width: 300px;
+  height: 30px;
+  font-size: 15pt;
+  text-align: center;
+}
 .footer {
   display: flex;
   justify-content: space-evenly;

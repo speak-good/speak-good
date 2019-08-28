@@ -31,7 +31,7 @@ export default function(props) {
             <h4>Keep Trying!</h4>
             <img
               className="resultImage"
-              src="https://media.giphy.com/media/hV0pccEE0jLfelZPCC/giphy.gif"
+              src="https://media.giphy.com/media/kd3uvnVNZaFnXepecO/giphy.gif"
             />
           </div>
         )}

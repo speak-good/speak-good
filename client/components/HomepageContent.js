@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import ScrollUpButton from 'react-scroll-up-button'
 
 const Content = () => {
   return (
@@ -144,7 +145,9 @@ const Content = () => {
             Juliana Albano ∙ Morgan Mattone ∙ Sharon Osterbind ∙ Teressa Son
           </p>
         </div>
-        <div />
+        <ScrollUpButton>
+          <span>Back To Top</span>
+        </ScrollUpButton>
       </div>
     </div>
   )

@@ -70,7 +70,7 @@ header nav {
 
 .nav-item {
   height: 1.5em;
-  margin: 0 1.5em 0 0;
+  margin: 1.25em 1.5em 0 0;
 }
 
 .nav-item a {
@@ -294,6 +294,7 @@ section h2:after {
 #demo-title {
   padding-top: 170px;
   text-align: center;
+  margin-top: 0;
 }
 
 .profile-body {
@@ -319,7 +320,6 @@ section h2:after {
 #countdownDiv,
 #past-recordings-header {
   text-align: center;
-  margin-top: 70px;
 }
 
 .powerCamDiv {
@@ -579,11 +579,10 @@ section h2:after {
   border-color: #3412f3;
 }
 #small-auth-form {
-  border-style: solid;
-  border-color: #3412f3;
   padding: 50px;
   width: 550px;
   height: 555px;
+  text-align: center;
 }
 #email-flex {
   display: flex;
@@ -591,6 +590,10 @@ section h2:after {
   justify-content: center;
   align-content: center;
   margin: 0 0 8px 0;
+}
+
+#signup-no-margin {
+  margin: 0;
 }
 
 #auth-button-center {

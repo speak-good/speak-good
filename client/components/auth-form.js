@@ -15,7 +15,7 @@ const AuthForm = props => {
         <form id="small-auth-form" onSubmit={handleSubmit} name={name}>
           <div>
             {displayName === 'Sign Up' ? (
-              <div>
+              <div id="signup-no-margin">
                 <div>
                   <label htmlFor="firstName">
                     <h5 className="auth-form-text">First Name</h5>
@@ -42,22 +42,20 @@ const AuthForm = props => {
             )}
             <div id="email-flex">
               <div>
-                <div>
-                  <label htmlFor="email">
-                    <h5 className="auth-form-text">Email</h5>
-                  </label>
-                  <input className="input-stretch" name="email" type="text" />
-                </div>
-                <div>
-                  <label htmlFor="password">
-                    <h5 className="auth-form-text">Password</h5>
-                  </label>
-                  <input
-                    className="input-stretch"
-                    name="password"
-                    type="password"
-                  />
-                </div>
+                <label htmlFor="email">
+                  <h5 className="auth-form-text">Email</h5>
+                </label>
+                <input className="input-stretch" name="email" type="text" />
+              </div>
+              <div>
+                <label htmlFor="password">
+                  <h5 className="auth-form-text">Password</h5>
+                </label>
+                <input
+                  className="input-stretch"
+                  name="password"
+                  type="password"
+                />
               </div>
 
               <div id="auth-button-center">

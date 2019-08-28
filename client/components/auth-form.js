@@ -65,13 +65,13 @@ const AuthForm = props => {
               </div>
               {error && error.response && <div> {error.response.data} </div>}
             </div>
-            <form method="get" action="/auth/google">
-              <div className="google-oauth">
-                <button type="submit" id="google-oauth-button">
-                  {displayName} with Google
-                </button>
-              </div>
-            </form>
+          </div>
+        </form>
+        <form method="get" action="/auth/google">
+          <div className="google-oauth">
+            <button type="submit" id="google-oauth-button">
+              {displayName} with Google
+            </button>
           </div>
         </form>
       </div>

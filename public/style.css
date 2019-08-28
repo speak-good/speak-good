@@ -578,3 +578,28 @@ section h2:after {
   background-color: white;
   border-color: #3412f3;
 }
+
+.footer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #3412f3;
+  color: white;
+  font-size: 14px;
+}
+
+#with-love {
+  color: white;
+  font-size: 14px;
+}
+
+.authors {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.authors p {
+  margin-top: 0%;
+}

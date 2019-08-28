@@ -136,6 +136,16 @@ const Content = () => {
           </div>
         </div>
       </section>
+      <div className="footer">
+        <div>© 2019 TMJS, Inc.</div>
+        <div className="authors">
+          <h1 id="with-love">Made with &hearts; by</h1>
+          <p>
+            Juliana Albano ∙ Morgan Mattone ∙ Sharon Osterbind ∙ Teressa Son
+          </p>
+        </div>
+        <div />
+      </div>
     </div>
   )
 }

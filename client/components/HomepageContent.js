@@ -56,10 +56,15 @@ const Content = () => {
             reference interview sections quickly, and make improvements to your
             speech in no time! Use our state of the art algorithms to help you
             keep track of your most frequestly used filler words and improve
-            your performance as a public speaker!
+            your performance as a public speaker.<br />
+            <Link to="/signup">
+              <button className="vid-button" type="button">
+                Get Started
+              </button>
+            </Link>
           </p>
           <div id="aboutimg">
-            <img src="images/interview.png" alt="interview" />
+            <img src="https://i.imgur.com/zrM0kWK.gif" alt="interview" />
           </div>
         </div>
       </section>
@@ -79,7 +84,7 @@ const Content = () => {
           </div>
           <div className="feature-profile">
             <div className="icon">
-              <img src="https://i.imgur.com/gi3jhai.png" alt="interview" />
+              <img src="https://i.imgur.com/9m3uEkQ.png" alt="interview" />
             </div>
             <h3 className="feature-name">Analyze Speech</h3>
             <p className="feature-blurb">
@@ -95,8 +100,8 @@ const Content = () => {
             </div>
             <h3 className="feature-name">Boost Your Confidence</h3>
             <p className="feature-blurb">
-              An upright, confident posture speaks a million words - use our
-              Power Pose guide to get an instant mood boost!
+              Nothing like a good power pose to set the tone for your next
+              interview - use our Power Pose guide to get an instant mood boost!
             </p>
           </div>
           <div className="feature-profile">

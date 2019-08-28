@@ -302,6 +302,12 @@ section h2:after {
   padding-left: 100px;
 }
 
+#clapping {
+  width: 650px;
+  height: 450px;
+  margin-right: 25px;
+}
+
 #vidRef {
   width: 650px;
   height: 450px;

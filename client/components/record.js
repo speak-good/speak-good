@@ -100,7 +100,8 @@ export class Record extends React.Component {
       grade: '',
       linkOut: false,
       save: false,
-      started: false
+      started: false,
+      gif: false
     }
     this.putVideoInFirebase = this.putVideoInFirebase.bind(this)
     this.initializeFirebase = this.initializeFirebase.bind(this)
@@ -153,7 +154,8 @@ export class Record extends React.Component {
       this.setState({
         linkOut: false,
         save: false,
-        started: true
+        started: true,
+        gif: false
       })
       this.props.resetTranscript()
       this.props.startListening()
@@ -215,7 +217,8 @@ export class Record extends React.Component {
     const realStopRecording = () => {
       let that = this
       this.setState({
-        started: false
+        started: false,
+        gif: true
       })
       this.props.abortListening()
       this.props.stopListening()
@@ -310,7 +313,8 @@ export class Record extends React.Component {
         transcript: '',
         fillerCount: 0,
         grade: '',
-        linkOut: false
+        linkOut: false,
+        gif: false
       })
 
       recorder.reset()
@@ -340,7 +344,14 @@ export class Record extends React.Component {
         </div>
         <div id="recording-container">
           <div>
-            <video id="vidRef" ref="vidRef" controls autoPlay />
+            {!this.state.gif ? (
+              <video id="vidRef" ref="vidRef" controls autoPlay />
+            ) : (
+              <img
+                id="clapping"
+                src="https://media0.giphy.com/media/4HrvfHcHC8cmB4w6c9/giphy.gif"
+              />
+            )}
           </div>
           <div id="button-container">
             {this.state.videoBlob ? (

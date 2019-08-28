@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import ScrollUpButton from 'react-scroll-up-button'
 
 const Content = () => {
   return (
@@ -136,6 +137,18 @@ const Content = () => {
           </div>
         </div>
       </section>
+      <div className="footer">
+        <div>© 2019 TMJS, Inc.</div>
+        <div className="authors">
+          <h1 id="with-love">Made with &hearts; by</h1>
+          <p>
+            Juliana Albano ∙ Morgan Mattone ∙ Sharon Osterbind ∙ Teressa Son
+          </p>
+        </div>
+        <ScrollUpButton>
+          <span>Back To Top</span>
+        </ScrollUpButton>
+      </div>
     </div>
   )
 }

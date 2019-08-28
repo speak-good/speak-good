@@ -51,18 +51,26 @@ const fillerWords = {
 }
 
 const fillerPhrases = {
-  'I mean': true,
-  'I guess': true,
-  'You know': true,
-  'you know': true,
-  'You see': true,
-  'you see': true,
-  'Or something': true,
-  'or something': true,
-  'Kind of': true,
-  'kind of': true,
-  'Sort of': true,
-  'sort of': true
+  Imean: true,
+  Iguess: true,
+  Youknow: true,
+  youknow: true,
+  Yousee: true,
+  yousee: true,
+  Orsomething: true,
+  orsomething: true,
+  Kindof: true,
+  kindof: true,
+  Sortof: true,
+  sortof: true
+}
+
+const longFillerPhrases = {
+  'Idon’tknow': true,
+  Stufflikethat: true,
+  stufflikethat: true,
+  Ithinkthat: true,
+  Ifeellike: true
 }
 
 export class SingleRecording extends React.Component {
@@ -194,8 +202,19 @@ export class SingleRecording extends React.Component {
                   : transcript
                       .split(' ')
                       .map(
-                        word =>
-                          fillerWords[word] ? (
+                        (word, index, arr) =>
+                          fillerWords[word] ||
+                          fillerPhrases[word + arr[index + 1]] ||
+                          fillerPhrases[arr[index - 1] + word] ||
+                          longFillerPhrases[
+                            word + arr[index + 1] + arr[index + 2]
+                          ] ||
+                          longFillerPhrases[
+                            arr[index - 1] + word + arr[index + 2]
+                          ] ||
+                          longFillerPhrases[
+                            arr[index - 2] + arr[index - 1] + word
+                          ] ? (
                             <span className="highlight">{`${word} `}</span>
                           ) : (
                             <span>{`${word} `}</span>

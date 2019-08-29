@@ -367,13 +367,18 @@ export class Record extends React.Component {
             ) : (
               <div>
                 <div id="flex">
-                  <button
-                    disabled={this.state.started}
-                    className="vid-button"
-                    onClick={startRecording}
-                  >
-                    Start Recording
-                  </button>
+                  {!this.state.started ? (
+                    <button
+                      disabled={this.state.started}
+                      className="vid-button"
+                      onClick={startRecording}
+                    >
+                      Start Recording
+                    </button>
+                  ) : (
+                    ''
+                  )}
+
                   <button
                     disabled={!this.state.started}
                     id="stop"

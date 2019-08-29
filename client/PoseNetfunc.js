@@ -73,7 +73,7 @@ export function poseDetectionFrame(
         let normArray1 = normArrGen(poses)
 
         let minCosineDistance = compare(normArray1, flatRefImage)
-        if (minCosineDistance > 0.4) {
+        if (minCosineDistance > 0.3) {
           store.dispatch(gotResult('BadPose', minCosineDistance))
         } else {
           store.dispatch(gotResult(compareObj[index].pose, minCosineDistance))

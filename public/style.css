@@ -149,19 +149,21 @@ section h2:after {
   height: 100%;
 }
 
-#power {
+#filler {
   background-color: #ffffff;
   padding: 0px 20px 23px 20px;
   /* flex-direction: column; */
 }
 
 #about,
-#speech {
+#speech,
+#power {
   background-color: #f1f1f1;
   padding: 0px 15px 10px 20px;
 }
 
 #power p,
+#filler p,
 #about p {
   /* position: absolute;
   color: #fff;
@@ -177,6 +179,7 @@ section h2:after {
 }
 
 #power #aboutimg,
+#filler #aboutimg,
 #about #aboutimg {
   padding: 0px 37px 60px 15px;
   flex: 2;
@@ -189,6 +192,7 @@ section h2:after {
 }
 
 #power img,
+#filler img,
 #about img {
   display: block;
   width: 100%;
@@ -585,9 +589,9 @@ section h2:after {
   border-color: #3412f3;
 }
 #small-auth-form {
-  /* padding: 50px; */
+  padding: 50px;
   width: 550px;
-  /* height: 555px; */
+  height: 555px;
   text-align: center;
 }
 #email-flex {

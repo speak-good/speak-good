@@ -30,26 +30,7 @@ const Content = () => {
           </div>
         </div>
       </section>
-      <section id="power">
-        <h2>Unleash Your Power</h2>
-        <div className="flex">
-          <div id="powerimg">
-            <img src="images/powerpose.png" alt="interview" />
-          </div>
-          <p>
-            Studies show that power poses can instantaneously give you a boost
-            in confidence and mood. <br /> Use our power pose guide to set those
-            hormonal changes in motion and get the confidence you need to ace
-            your interview!<br />
-            <Link to="/train">
-              <button className="vid-button" type="button">
-                Start Training
-              </button>
-            </Link>
-          </p>
-        </div>
-      </section>
-      <section id="about">
+      <section id="filler">
         <h2>Track Filler Words</h2>
         <div className="flex">
           <p>
@@ -67,6 +48,25 @@ const Content = () => {
           <div id="aboutimg">
             <img src="https://i.imgur.com/zrM0kWK.gif" alt="interview" />
           </div>
+        </div>
+      </section>
+      <section id="power">
+        <h2>Unleash Your Power</h2>
+        <div className="flex">
+          <div id="powerimg">
+            <img src="images/powerpose.png" alt="interview" />
+          </div>
+          <p>
+            Studies show that power poses can instantaneously give you a boost
+            in confidence and mood. <br /> Use our power pose guide to set those
+            hormonal changes in motion and get the confidence you need to ace
+            your interview!<br />
+            <Link to="/train">
+              <button className="vid-button" type="button">
+                Start Training
+              </button>
+            </Link>
+          </p>
         </div>
       </section>
       <section id="features">

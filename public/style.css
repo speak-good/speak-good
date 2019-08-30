@@ -589,9 +589,9 @@ section h2:after {
   border-color: #3412f3;
 }
 #small-auth-form {
-  padding: 50px;
+  /* padding: 50px; */
   width: 550px;
-  height: 555px;
+  /* height: 555px; */
   text-align: center;
 }
 #email-flex {

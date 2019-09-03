@@ -2,7 +2,7 @@
 
 _Speak Good, Feel Great_
 
-SpeakGood is a web-application designed to help users become better public speakers and interviewers at their own convenience.
+SpeakGood is a web-application designed to help users become better public speakers and interviewers at their own convenience. Our web-app allows a user to record a video of themselves and, upon saving, a transcript is provided and processed to pick out the filler words said such as: 'like', 'you know', and 'whatever'. Before their big day, a user may also choose to be guided through a powerpose where a user can compose themselves and ensure a boost of confidence!
 
 [SpeakGood Deployed on Heroku][speakgood-heroku]
 
@@ -25,12 +25,14 @@ npm run seed
 git clone https://github.com/speak-good/speak-good.git
 ```
 
-cd into your speakgood directory and then run the following commands:
+* cd into your speakgood directory and then run the following commands:
 
 ```
 npm install
 npm run start-dev
 ```
+
+* Follow `BOILERPLATE-README.md` for further instuctions.
 
 ## Firebase and OAuth Keys
 

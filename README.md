@@ -78,3 +78,36 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
   * You can get them from the [Google APIs dashboard][google-apis].
 
 [google-apis]: https://console.developers.google.com/apis/credentials
+
+### PoseNet
+
+* PoseNet runs on TensorFlow.js 
+* Dependencies include:
+- "@tensorflow-models/posenet": "^2.1.3",
+- "@tensorflow/tfjs-converter": "^1.2.8",
+- "@tensorflow/tfjs-core": "^1.2.8"
+
+* For pose comparison and calculation:
+- "compute-cosine-similarity": "^1.0.0"
+
+What’s so exciting about PoseNet / what makes it special?
+Easy setup - web browser with camera
+Shareability - light setup allows for simple upload to the webpage
+Privacy - PoseNet runs on the browser so no pose data leaves user’s computer
+
+Camera.js - PoseNet setup
+static defaultProps - video setup and sizing variables
+navigator.mediaDevices.getUserMedia() - method on the browser to grab specified user media
+componentDidMount() - sets up camera and loads PoseNet model
+PoseNetfunc.js - calculates the user input
+async findPoseDetectionFrame()
+flatImageData is grabs reference image’s normalized array from finalData.js (via PowerPose.js)
+grabs user data and pushes into poses array to be normalized in normArray1 
+Normalized array generator called from flatArrGen
+Compare function performs cosineSimilarity and then finds cosine distance 
+Thunk calls to the trainer store to set score calculation to state
+estimateSinglePose() - PoseNet’s built in methods to estimate poses
+we use forEach on each pose in the resulting poses array to draw the key body points and skeleton
+Utils.js has the “drawing” functionalities
+requestAnimationFrame() - built in function from the window. tells the browser that you wish to perform an animation and requests that the browser call a specified function to update an animation
+

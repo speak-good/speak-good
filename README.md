@@ -93,14 +93,14 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
   * navigator.mediaDevices.getUserMedia() - method on the browser to grab specified user media
   * componentDidMount() - sets up camera and loads PoseNet model
 * PoseNetfunc.js - calculates the user input
-async findPoseDetectionFrame()
-flatImageData is grabs reference image’s normalized array from finalData.js (via PowerPose.js)
-grabs user data and pushes into poses array to be normalized in normArray1 
-Normalized array generator called from flatArrGen
-Compare function performs cosineSimilarity and then finds cosine distance 
-Thunk calls to the trainer store to set score calculation to state
-estimateSinglePose() - PoseNet’s built in methods to estimate poses
-we use forEach on each pose in the resulting poses array to draw the key body points and skeleton
-Utils.js has the “drawing” functionalities
-requestAnimationFrame() - built in function from the window. tells the browser that you wish to perform an animation and requests that the browser call a specified function to update an animation
+  * findPoseDetectionFrame
+    * flatImageData is grabs reference image’s normalized array from finalData.js (via PowerPose.js)
+    * grabs user data and pushes into poses array to be normalized in normArray1 
+    * Normalized array generator called from flatArrGen
+* "Compare" function performs cosineSimilarity and then finds cosine distance 
+* Thunk calls to the trainer store to set score calculation to state
+* estimateSinglePose() - PoseNet’s built in methods to estimate poses
+    * we use forEach on each pose in the resulting poses array to draw the key body points and skeleton
+* Utils.js has the “drawing” functionalities
+* requestAnimationFrame() - built in function from the window. tells the browser that you wish to perform an animation and requests that the browser call a specified function to update an animation
 

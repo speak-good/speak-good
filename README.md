@@ -86,20 +86,13 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
   * "@tensorflow-models/posenet": "^2.1.3",
   * "@tensorflow/tfjs-converter": "^1.2.8",
   * "@tensorflow/tfjs-core": "^1.2.8"
+  * For pose comparison and calculation: "compute-cosine-similarity": "^1.0.0"
 
-* For pose comparison and calculation:
-- "compute-cosine-similarity": "^1.0.0"
-
-What’s so exciting about PoseNet / what makes it special?
-Easy setup - web browser with camera
-Shareability - light setup allows for simple upload to the webpage
-Privacy - PoseNet runs on the browser so no pose data leaves user’s computer
-
-Camera.js - PoseNet setup
-static defaultProps - video setup and sizing variables
-navigator.mediaDevices.getUserMedia() - method on the browser to grab specified user media
-componentDidMount() - sets up camera and loads PoseNet model
-PoseNetfunc.js - calculates the user input
+* Camera.js - PoseNet setup
+  * static defaultProps - video setup and sizing variables
+  * navigator.mediaDevices.getUserMedia() - method on the browser to grab specified user media
+  * componentDidMount() - sets up camera and loads PoseNet model
+* PoseNetfunc.js - calculates the user input
 async findPoseDetectionFrame()
 flatImageData is grabs reference image’s normalized array from finalData.js (via PowerPose.js)
 grabs user data and pushes into poses array to be normalized in normArray1 

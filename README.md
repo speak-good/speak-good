@@ -79,7 +79,7 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
 
 [google-apis]: https://console.developers.google.com/apis/credentials
 
-### PoseNet
+## PoseNet
 
 * PoseNet runs on TensorFlow.js 
 * Dependencies include:

@@ -94,7 +94,7 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
   * componentDidMount() - sets up camera and loads PoseNet model
 * PoseNetfunc.js - calculates the user input
   * findPoseDetectionFrame
-    * flatImageData is grabs reference image’s normalized array from finalData.js (via PowerPose.js)
+    * flatImageData grabs reference image’s normalized array from finalData.js (via PowerPose.js)
     * grabs user data and pushes into poses array to be normalized in normArray1 
     * Normalized array generator called from flatArrGen
 * "Compare" function performs cosineSimilarity and then finds cosine distance 

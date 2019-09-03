@@ -82,10 +82,10 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
 ## PoseNet
 
 * PoseNet runs on TensorFlow.js 
-* Dependencies include:
-- "@tensorflow-models/posenet": "^2.1.3",
-- "@tensorflow/tfjs-converter": "^1.2.8",
-- "@tensorflow/tfjs-core": "^1.2.8"
+* Dependencies include: 
+  * "@tensorflow-models/posenet": "^2.1.3",
+  * "@tensorflow/tfjs-converter": "^1.2.8",
+  * "@tensorflow/tfjs-core": "^1.2.8"
 
 * For pose comparison and calculation:
 - "compute-cosine-similarity": "^1.0.0"

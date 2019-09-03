@@ -79,6 +79,14 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
 
 [google-apis]: https://console.developers.google.com/apis/credentials
 
+### Web Speech API
+* For our speech-to-text functionality we chose the Web Speech API, because it does speech recognition in the browswer using a user's built in media devices. Documentation for the Web Speech API can be found here: https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API
+
+Since we used React, we chose the React-Speech-Recognition npm module which is a higher order component that wraps one of your root-level React components, giving Web Speech API access to its children components. Documentation for this higher order component can be found here: https://www.npmjs.com/package/react-speech-recognition
+
+### RecordRTC
+For our recording capabilities, we chose RecordRTC to record our user's presentations. Documentation can be found for this API here: https://recordrtc.org/
+
 ## PoseNet
 
 * PoseNet runs on TensorFlow.js 

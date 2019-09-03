@@ -1,10 +1,10 @@
-#SpeakGood
+# SpeakGood
 
 _Speak Good, Feel Great_
 
 SpeakGood is a web-application designed to help users become better public speakers and interviewers at their own convenience.
 
-[SpeakGood on Deployed on Heroku][speakgood-heroku]
+[SpeakGood Deployed on Heroku][speakgood-heroku]
 
 [speakgood-heroku]: https://speakgood.herokuapp.com/
 
@@ -12,14 +12,14 @@ SpeakGood is a web-application designed to help users become better public speak
 
 To run SpeakGood on your local machine, do the following:
 
-\*Create a database in postgres called "speakgood"
+* Create a database in postgres called "speakgood"
 
 ```
 createdb speakgood
 npm run seed
 ```
 
-\*Fork to your repository and then clone the repo:
+* Fork to your repository and then clone the repo:
 
 ```
 git clone https://github.com/speak-good/speak-good.git
@@ -63,7 +63,7 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
 
 ### Firebase
 
-\*To use Firebase Storage, complete the steps above with your firebaseConfig supplied from Google Firebase
+* To use Firebase Storage, complete the steps above with your firebaseConfig supplied from Google Firebase
 
 * You can get them from the [Firebase Project Settings][firebase-apis] once you've created a project and initialized Storage.
 

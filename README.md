@@ -89,16 +89,7 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
   * For pose comparison and calculation: "compute-cosine-similarity": "^1.0.0"
 
 * Camera.js - PoseNet setup
-  * static defaultProps - video setup and sizing variables
-  * navigator.mediaDevices.getUserMedia() - method on the browser to grab specified user media
-  * componentDidMount() - sets up camera and loads PoseNet model
 * PoseNetfunc.js - calculates the user input
-  * findPoseDetectionFrame
-    * flatImageData grabs reference image’s normalized array from finalData.js (via PowerPose.js)
-    * grabs user data and pushes into poses array to be normalized in normArray1 
-    * Normalized array generator called from flatArrGen
-* "Compare" function performs cosineSimilarity and then finds cosine distance 
-* Thunk calls from the trainer store to set score calculation to state
 * estimateSinglePose() - PoseNet’s built in methods to estimate poses
     * we use forEach on each pose in the resulting poses array to draw the key body points and skeleton
 * Utils.js has the “drawing” functionalities

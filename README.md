@@ -98,7 +98,7 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
     * grabs user data and pushes into poses array to be normalized in normArray1 
     * Normalized array generator called from flatArrGen
 * "Compare" function performs cosineSimilarity and then finds cosine distance 
-* Thunk calls to the trainer store to set score calculation to state
+* Thunk calls from the trainer store to set score calculation to state
 * estimateSinglePose() - PoseNet’s built in methods to estimate poses
     * we use forEach on each pose in the resulting poses array to draw the key body points and skeleton
 * Utils.js has the “drawing” functionalities

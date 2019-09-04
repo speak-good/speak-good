@@ -99,7 +99,5 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
 * Camera.js - PoseNet setup
 * PoseNetfunc.js - calculates the user input
 * estimateSinglePose() - PoseNet’s built in methods to estimate poses
-    * we use forEach on each pose in the resulting poses array to draw the key body points and skeleton
 * Utils.js has the “drawing” functionalities
-* requestAnimationFrame() - built in function from the window. tells the browser that you wish to perform an animation and requests that the browser call a specified function to update an animation
 

@@ -98,6 +98,5 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
 
 * Camera.js - PoseNet setup
 * PoseNetfunc.js - calculates the user input
-* estimateSinglePose() - PoseNet’s built in methods to estimate poses
 * Utils.js has the “drawing” functionalities
 
